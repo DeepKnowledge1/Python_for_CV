@@ -1,6 +1,14 @@
-## 🎯 Python for Computer Vision: Build Your Own Image Toolkit from Scratch
+## **🎯 Python for Computer Vision: Build Your Own Image Toolkit from Scratch**
 
-A hands-on course where you'll learn how to **build your own image processing toolkit in Python**, tailored for **real-world computer vision tasks**. From loading images to simulating defects and preparing datasets for deep learning — this course gives you the tools to do it all (and ship your own CLI tool at the end!).
+<left>
+<!-- <img src="doc/img.jpg" alt="Machine Learning"  /> -->
+<img src="doc/banner2.png" alt="Machine Learning" width=1200 />
+
+</left>
+
+<!-- <div style="text-align: justify "> -->
+
+A hands-on course where you'll learn how to **build your own image processing toolkit in Python**, <br/>tailored for **real-world computer vision tasks**. From loading images to simulating defects and preparing datasets for deep learning — this course gives you <br/>the tools to do it all (and ship your own CLI tool at the end!).
 
 ### 🧰 What You'll Learn:
 
@@ -37,7 +45,7 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 ### 🔹 1. Introduction Series (Videos 1–7)
 
 This section introduces the course and sets the stage for what's to come. 
-Learners will understand the goals of the course, why computer vision is important, and how Python can be used to solve real-world problems in this field. They'll also set up a proper development environment with modern tools.
+Learners will understand the goals of the course, why computer vision is important, and how Python<br/> can be used to solve real-world problems in this field. They'll also set up a proper development environment with modern tools.
 
 | Video | Title                                                                   |
 | ----- | ----------------------------------------------------------------------- |
@@ -53,7 +61,7 @@ Learners will understand the goals of the course, why computer vision is importa
 
 ### 🔹 2. Core Python Basics for CV (Videos 8–14)
 
-This section focuses on essential Python concepts required for image processing. It covers variables, loops, functions, and other key basics, ensuring learners have the foundational knowledge needed to work with images.
+This section focuses on essential Python concepts required for image processing. It covers variables, <br/>loops, functions, and other key basics, ensuring learners have the foundational knowledge needed to work with images.
 
 | Video | Title                                                          |
 | ----- | -------------------------------------------------------------- |
@@ -69,7 +77,7 @@ This section focuses on essential Python concepts required for image processing.
 
 ### 🔹 3. Object-Oriented Programming (OOP) in Computer Vision (Videos 13–19)
 
-Learners will explore object-oriented programming principles and how they can be applied to create efficient and reusable code for image processing tasks.
+Learners will explore object-oriented programming principles and how they can be applied to create <br/>efficient and reusable code for image processing tasks.
 
 | Video | Title                                                                                       |
 | ----- | ------------------------------------------------------------------------------------------- |
@@ -85,7 +93,7 @@ Learners will explore object-oriented programming principles and how they can be
 
 ### 🔹 4. Working with Images in Python (Videos 20–25)
 
-In this section, learners get hands-on experience with image processing tools like OpenCV and Pillow. They will learn how to manipulate images using basic operations such as resizing, cropping, and color conversions.
+In this section, learners get hands-on experience with image processing tools like OpenCV and Pillow.<br/> They will learn how to manipulate images using basic operations such as resizing, cropping, and color conversions.
 
 | Video | Title                                                                 |
 | ----- | --------------------------------------------------------------------- |
@@ -100,7 +108,7 @@ In this section, learners get hands-on experience with image processing tools li
 
 ### 🔹 5. File & Folder Management (Videos 26–32)
 
-Learners will focus on organizing and managing large datasets, an essential skill for anyone working with multiple image files. This section covers renaming, moving, and converting files in bulk, plus version control for image datasets.
+Learners will focus on organizing and managing large datasets, an essential skill for anyone working <br/>with multiple image files. This section covers renaming, moving, and converting files in bulk, plus version control for image datasets.
 
 | Video | Title                                                         |
 | ----- | ------------------------------------------------------------- |
@@ -116,7 +124,7 @@ Learners will focus on organizing and managing large datasets, an essential skil
 
 ### 🔹 6. Image Manipulation & Preprocessing (Videos 33–38)
 
-In this section, learners will dive into image preprocessing techniques like cropping, patching, and enhancing contrast, which are crucial for preparing images for machine learning models.
+In this section, learners will dive into image preprocessing techniques like cropping, patching, <br/>and enhancing contrast, which are crucial for preparing images for machine learning models.
 
 | Video | Title                                                 |
 | ----- | ----------------------------------------------------- |
@@ -131,7 +139,7 @@ In this section, learners will dive into image preprocessing techniques like cro
 
 ### 🔹 7. Data Augmentation & Defect Simulation (Videos 39–44)
 
-This section teaches learners how to simulate real-world conditions by adding noise, blur, and defects to images, helping build more robust models that can handle various real-world scenarios.
+This section teaches learners how to simulate real-world conditions by adding noise, blur, and <br/>defects to images, helping build more robust models that can handle various real-world scenarios.
 
 | Video | Title                                                    |
 | ----- | -------------------------------------------------------- |
@@ -146,7 +154,7 @@ This section teaches learners how to simulate real-world conditions by adding no
 
 ### 🔹 8. Mask Generation & Segmentation Tools (Videos 45–49)
 
-Here, learners will explore how to create masks for segmentation tasks, allowing them to identify and isolate objects within images.
+Here, learners will explore how to create masks for segmentation tasks, allowing them to identify <br/>and isolate objects within images.
 
 | Video | Title                                                 |
 | ----- | ----------------------------------------------------- |
@@ -160,7 +168,7 @@ Here, learners will explore how to create masks for segmentation tasks, allowing
 
 ### 🔹 9. Metadata & Annotation Tools (Videos 50–53)
 
-In this section, learners will understand how to work with annotation files like JSON and perform tasks such as filtering annotations and renaming classes.
+In this section, learners will understand how to work with annotation files like JSON and perform <br/>tasks such as filtering annotations and renaming classes.
 
 | Video | Title                                         |
 | ----- | --------------------------------------------- |
@@ -173,7 +181,7 @@ In this section, learners will understand how to work with annotation files like
 
 ### 🔹 10. Dataset Analysis & Statistics (Videos 54–58)
 
-This section covers techniques to analyze datasets before training models, including checking for imbalances, duplicates, and visualizing the data to better understand its structure.
+This section covers techniques to analyze datasets before training models, including checking for <br/>imbalances, duplicates, and visualizing the data to better understand its structure.
 
 | Video | Title                                                 |
 | ----- | ----------------------------------------------------- |
@@ -187,7 +195,7 @@ This section covers techniques to analyze datasets before training models, inclu
 
 ### 🔹 11. Performance Optimization (Videos 59–63)
 
-This new section focuses on techniques to process large image datasets efficiently, including vectorization, GPU acceleration, and other optimization strategies.
+This new section focuses on techniques to process large image datasets efficiently, including <br/>vectorization, GPU acceleration, and other optimization strategies.
 
 | Video | Title                                                           |
 | ----- | --------------------------------------------------------------- |
@@ -201,7 +209,7 @@ This new section focuses on techniques to process large image datasets efficient
 
 ### 🔹 12. Model Validation & Testing (Videos 64–67)
 
-This new section helps students validate their preprocessing techniques by training simple models on the processed data, ensuring their pipeline is effective.
+This new section helps students validate their preprocessing techniques by training simple models <br/>on the processed data, ensuring their pipeline is effective.
 
 | Video | Title                                                      |
 | ----- | ---------------------------------------------------------- |
@@ -214,7 +222,7 @@ This new section helps students validate their preprocessing techniques by train
 
 ### 🔹 13. Final Project: Build a Full CV Toolkit (Videos 68–72)
 
-The final project brings together everything learned in the course to create a comprehensive Python toolkit for image processing, complete with a command-line interface (CLI).
+The final project brings together everything learned in the course to create a comprehensive Python <br/>toolkit for image processing, complete with a command-line interface (CLI).
 
 | Video | Title                                             |
 | ----- | ------------------------------------------------- |
@@ -228,7 +236,7 @@ The final project brings together everything learned in the course to create a c
 
 ### 🔹 14. Bonus Tips & Next Steps (Videos 73–77)
 
-This section offers practical advice on optimizing code and troubleshooting common errors, as well as directions for continuing learning in the field of deep learning and computer vision.
+This section offers practical advice on optimizing code and troubleshooting common errors, as well as <br/>directions for continuing learning in the field of deep learning and computer vision.
 
 | Video | Title                                                    |
 | ----- | -------------------------------------------------------- |
@@ -238,3 +246,5 @@ This section offers practical advice on optimizing code and troubleshooting comm
 | 76    | 📦 Packaging & Distributing Your CV Tools                |
 | 77    | 🚀 Next Steps: Transition to CNNs & Deep Learning        |
 | 78    | 📣 Share Your Projects! Let's Celebrate Your Progress 🎉 |
+
+<!-- </div> -->
