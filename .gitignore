@@ -32,6 +32,7 @@ data/large_datasets/
 !data/sample_images/*.png
 model_weights/*.pth
 model_weights/*.h5
+!doc/*.png
 
 # Jupyter notebooks
 .ipynb_checkpoints
