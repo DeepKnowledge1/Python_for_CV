@@ -131,7 +131,6 @@ This section introduces the course and sets the stage for what's to come. Learne
 
 | Video | Title                                                                   |
 | ----- | ----------------------------------------------------------------------- |
-| 1     | 🎬 \[CTR Hook] "Struggling with Image Datasets? Here's How to Fix That" |
 | 2     | 📦 What is Computer Vision & Why Python? + Real-World Use Cases         |
 | 3     | 🛠️ Installing Python & Tools You Need – With Common Pitfalls & Fixes   |
 | 4     | 🎵 Modern Dependency Management with Poetry                             |
