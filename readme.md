@@ -2,25 +2,65 @@
 
 # 🧠 Python for Computer Vision: Build Your Own Image Toolkit from Scratch
 
-<a href="doc/banner2.png"><img src="doc/banner2.png" alt="Course Banner" width="100%" /></a>
+<img src="doc/py_cv.png" alt="Course Banner" width="850%" /></a>
 
 A hands-on course where you'll learn how to **build your own image processing toolkit in Python**, tailored for **real-world computer vision tasks**. From loading images to simulating defects and preparing datasets for deep learning — this course gives you the tools to do it all (and ship your own CLI tool at the end!).
 
-## ✅ What You'll Learn:
-- ✅ How to read, process, and save images using OpenCV, Pillow, and NumPy  
-- ✅ Modern Python development practices with Poetry and pre-commit hooks  
-- ✅ File management for large datasets – rename, move, filter, convert  
-- ✅ Image preprocessing: resize, crop, grayscale, normalize  
-- ✅ Data augmentation: simulate noise, blur, scratches, lighting changes  
-- ✅ Mask generation for segmentation tasks  
-- ✅ Object-oriented programming for reusable CV code  
-- ✅ Building a command-line interface (CLI) image toolkit  
-- ✅ Performance optimization techniques for large datasets  
-- ✅ Version control strategies for image projects  
-- ✅ Model validation to test your processed data  
-- ✅ Essential CV algorithms: edge detection, feature extraction, motion analysis  
-- ✅ Advanced segmentation techniques and contour analysis  
-- ✅ **NEW: Implement and optimize PaDiM anomaly detection for industrial defect detection**
+## ✅ What You'll Learn
+
+### 🔍 Python & Computer Vision Fundamentals
+- ✅ Core Python concepts and object-oriented programming for CV applications
+- ✅ How pixels, channels, and color spaces work in digital images
+- ✅ Reading, processing, and saving images with OpenCV, Pillow, and NumPy
+- ✅ Modern Python development with Poetry and pre-commit hooks
+
+### 📁 Dataset Management & Organization
+- ✅ File management for large datasets – rename, move, filter, convert
+- ✅ Organizing datasets into training/validation/test splits
+- ✅ Version control strategies for image projects using Git LFS & DVC
+- ✅ Metadata handling and annotation file management
+
+### 🖼️ Image Preprocessing & Manipulation
+- ✅ Essential transformations: resize, crop, rotate, grayscale, normalize
+- ✅ Histogram equalization and contrast enhancement
+- ✅ Patchify large images into tiles for processing
+- ✅ Overlay masks on images for segmentation visualization
+
+### 🧮 Essential CV Algorithms
+- ✅ Edge and corner detection: Sobel, Canny, Harris methods
+- ✅ Feature detection and matching with SIFT, SURF, ORB
+- ✅ Thresholding techniques: Otsu, adaptive, color-based
+- ✅ Contour detection and shape analysis
+
+### 🔄 Advanced Computer Vision Techniques
+- ✅ Motion analysis and optical flow for video processing
+- ✅ Watershed algorithm for complex segmentation
+- ✅ Connected component analysis and region properties
+- ✅ Creating image mosaics with homography and RANSAC
+
+### 🎭 Data Augmentation & Simulation
+- ✅ Simulate real-world defects: noise, blur, scratches, lighting changes
+- ✅ Generate synthetic masks for objects and annotations
+- ✅ Apply transformations in real-time for deep learning pipelines
+- ✅ Rotation and occlusion simulation for robustness training
+
+### 📊 Analysis & Validation
+- ✅ Dataset statistics and class distribution visualization
+- ✅ Duplicate image detection and dataset integrity checks
+- ✅ Model validation to test processed data effectiveness
+- ✅ Comparing model performance with different preprocessing techniques
+
+### ⚡ Performance Optimization
+- ✅ Multiprocessing for faster image batch processing
+- ✅ Vectorization techniques with NumPy for efficiency
+- ✅ GPU acceleration with CUDA for image processing
+- ✅ Memory management strategies for large datasets
+
+### 🔧 Tools & Integration
+- ✅ Building a command-line interface (CLI) image toolkit
+- ✅ Combining traditional CV with deep learning approaches
+- ✅ **Implement and optimize PaDiM anomaly detection for industrial defects**
+- ✅ Packaging and distributing your CV tools
 
 ## 🚀 By the End, You'll Have:
 A fully working `cv_toolkit.py` script that lets you run commands like:
@@ -42,7 +82,16 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 <summary><strong>Expand All Sections</strong></summary>
 
 - [🧠 Python for Computer Vision: Build Your Own Image Toolkit from Scratch](#-python-for-computer-vision-build-your-own-image-toolkit-from-scratch)
-  - [✅ What You'll Learn:](#-what-youll-learn)
+  - [✅ What You'll Learn](#-what-youll-learn)
+    - [🔍 Python \& Computer Vision Fundamentals](#-python--computer-vision-fundamentals)
+    - [📁 Dataset Management \& Organization](#-dataset-management--organization)
+    - [🖼️ Image Preprocessing \& Manipulation](#️-image-preprocessing--manipulation)
+    - [🧮 Essential CV Algorithms](#-essential-cv-algorithms)
+    - [🔄 Advanced Computer Vision Techniques](#-advanced-computer-vision-techniques)
+    - [🎭 Data Augmentation \& Simulation](#-data-augmentation--simulation)
+    - [📊 Analysis \& Validation](#-analysis--validation)
+    - [⚡ Performance Optimization](#-performance-optimization)
+    - [🔧 Tools \& Integration](#-tools--integration)
   - [🚀 By the End, You'll Have:](#-by-the-end-youll-have)
   - [💡 Perfect For:](#-perfect-for)
   - [📚 Table of Contents](#-table-of-contents)
@@ -69,7 +118,7 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
   - [📁 Section 18: Model Validation \& Testing (Videos 100–103)](#-section-18-model-validation--testing-videos-100103)
   - [📁 Section 19: Final Project – Build a Full CV Toolkit (Videos 99–103)](#-section-19-final-project--build-a-full-cv-toolkit-videos-99103)
     - [🧪 Mini Project: Build Your Own CLI Image Toolkit](#-mini-project-build-your-own-cli-image-toolkit)
-  - [📁 Section 20: Bonus Tips \& Next Steps (Videos 104–109)](#-section-20-bonus-tips--next-steps-videos-104109)
+  - [📁 Section 20: Bonus Tips \& Next Steps (Videos 104–108)](#-section-20-bonus-tips--next-steps-videos-104108)
   - [✅ Summary](#-summary)
 
 </details>
@@ -98,11 +147,11 @@ This section focuses on essential Python concepts required for image processing.
 
 | Video | Title                                                          |
 | ----- | -------------------------------------------------------------- |
-| 8     | 🔢 Variables, Numbers & Strings – For Image Metadata Handling  |
-| 9     | 📋 Lists, Tuples & Dictionaries – Managing File Paths & Labels |
-| 10    | ➡️ If Statements & Loops – Batch Processing Images Like a Pro  |
-| 11    | 🔁 Functions – Reusable Code for Image Helpers                 |
-| 12    | 🖼️ Reading Input & Displaying Output – OpenCV vs Pillow       |
+| 8     | 🔢 Variables, Numbers & Strings  |
+| 9     | 📋 Lists, Tuples & Dictionaries |
+| 10    | ➡️ If Statements & Loops   |
+| 11    | 🔁 Functions |
+| 12    | 🖼️ Reading Input & Displaying Output|
 | 13    | 🏫 Mini Project: Resize Multiple Images with a Function        |
 | 14    | 🧪 Quiz Time: Test Your Python Knowledge So Far                |
 
@@ -395,7 +444,7 @@ You’ll build this from scratch using all the tools you've learned throughout t
 
 ---
 
-## 📁 Section 20: Bonus Tips & Next Steps (Videos 104–109)
+## 📁 Section 20: Bonus Tips & Next Steps (Videos 104–108)
 
 This section offers practical advice on optimizing code and troubleshooting common errors, as well as directions for continuing learning in the field of deep learning and computer vision.
 
@@ -405,8 +454,7 @@ This section offers practical advice on optimizing code and troubleshooting comm
 | 105   | 🧾 Best Practices for ML/CV Project Structure            |
 | 106   | 📋 Git Repository Structure for CV Projects              |
 | 107   | 📦 Packaging & Distributing Your CV Tools                |
-| 108   | 🚀 Next Steps: Connection to Your CNN & ML Playlists     |
-| 109   | 📣 Share Your Projects! Let's Celebrate Your Progress 🎉 |
+| 108   | 📣 Share Your Projects! Let's Celebrate Your Progress 🎉 |
 
 ---
 
