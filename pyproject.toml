@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "python-for-cv"
+version = "0.1.0"
+description = "A hands-on course where you'll learn how to **build your own image processing toolkit in Python**, tailored for **real-world computer vision tasks**. From loading images to simulating defects and preparing datasets for deep learning — this course gives you the tools to do it all (and ship your own CLI tool at the end!)."
+authors = ["deep <deepp.knowledge@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.0"
+opencv-python = "^4.11.0.86"
+numpy = "^2.2.5"
+pillow = "^11.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

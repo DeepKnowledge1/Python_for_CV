@@ -46,3 +46,33 @@ pyenv local <version>        # set per-project
 pyenv shell <version>        # set for current shell only
 pyenv rehash                 # rebuild shims after installing pip packages
 ```
+
+
+
+# Modern Dependency Management with Poetry
+---
+
+### 📘 **Essential Poetry Commands Cheat Sheet**
+
+| 🛠️ **Category**     | 🧾 **Command**                                                | 🧩 **Description**                         | 💡 **Example**                                                |
+| -------------------- | ------------------------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------- |
+| 🔧 Project Setup     | `poetry new my_project`                                       | Create new project scaffold                | `poetry new image_toolkit`                                    |
+|                      | `poetry init`                                                 | Interactive setup in existing folder       | `poetry init`                                                 |
+| 📦 Dependency Mgmt   | `poetry add package`                                          | Add a regular dependency                   | `poetry add numpy`                                            |
+|                      | `poetry add --group dev package`                              | Add a dev-only dependency                  | `poetry add --group dev black`                                |
+|                      | `poetry remove package`                                       | Remove a package                           | `poetry remove pillow`                                        |
+|                      | `poetry update`                                               | Update all dependencies                    | `poetry update`                                               |
+| 📁 Environment       | `poetry install`                                              | Install dependencies from lockfile         | `poetry install`                                              |
+|                      | `poetry shell`                                                | Activate Poetry's virtual environment      | `poetry shell`                                                |
+|                      | `poetry run`                                                  | Run a command inside Poetry env            | `poetry run python main.py`                                   |
+|                      | `poetry env list`                                             | List virtual environments                  | `poetry env list`                                             |
+|                      | `poetry env remove`                                           | Delete virtual environment                 | `poetry env remove python3.11`                                |
+| 🔍 Inspection        | `poetry show`                                                 | Show installed packages                    | `poetry show`                                                 |
+|                      | `poetry show --tree`                                          | Show dependency tree                       | `poetry show --tree`                                          |
+|                      | `poetry check`                                                | Validate project config                    | `poetry check`                                                |
+| 🚚 Export (Plugin)   | `poetry export -f requirements.txt --output requirements.txt` | Export to pip format (**requires plugin**) | `poetry export -f requirements.txt --output requirements.txt` |
+| ⚙️ Plugin Management | `poetry self add plugin`                                      | Add official plugin                        | `poetry self add poetry-plugin-export`                        |
+
+---
+
+Let me know if you'd like this in Markdown, PDF, or as a printable poster!
