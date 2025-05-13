@@ -8,59 +8,15 @@ A hands-on course where you'll learn how to **build your own image processing to
 
 ## ✅ What You'll Learn
 
-### 🔍 Python & Computer Vision Fundamentals
-- ✅ Core Python concepts and object-oriented programming for CV applications
-- ✅ How pixels, channels, and color spaces work in digital images
-- ✅ Reading, processing, and saving images with OpenCV, Pillow, and NumPy
-- ✅ Modern Python development with Poetry and pre-commit hooks
-
-### 📁 Dataset Management & Organization
-- ✅ File management for large datasets – rename, move, filter, convert
-- ✅ Organizing datasets into training/validation/test splits
-- ✅ Version control strategies for image projects using Git LFS & DVC
-- ✅ Metadata handling and annotation file management
-
-### 🖼️ Image Preprocessing & Manipulation
-- ✅ Essential transformations: resize, crop, rotate, grayscale, normalize
-- ✅ Histogram equalization and contrast enhancement
-- ✅ Patchify large images into tiles for processing
-- ✅ Overlay masks on images for segmentation visualization
-
-### 🧮 Essential CV Algorithms
-- ✅ Edge and corner detection: Sobel, Canny, Harris methods
-- ✅ Feature detection and matching with SIFT, SURF, ORB
-- ✅ Thresholding techniques: Otsu, adaptive, color-based
-- ✅ Contour detection and shape analysis
-
-### 🔄 Advanced Computer Vision Techniques
-- ✅ Motion analysis and optical flow for video processing
-- ✅ Watershed algorithm for complex segmentation
-- ✅ Connected component analysis and region properties
-- ✅ Creating image mosaics with homography and RANSAC
-
-### 🎭 Data Augmentation & Simulation
-- ✅ Simulate real-world defects: noise, blur, scratches, lighting changes
-- ✅ Generate synthetic masks for objects and annotations
-- ✅ Apply transformations in real-time for deep learning pipelines
-- ✅ Rotation and occlusion simulation for robustness training
-
-### 📊 Analysis & Validation
-- ✅ Dataset statistics and class distribution visualization
-- ✅ Duplicate image detection and dataset integrity checks
-- ✅ Model validation to test processed data effectiveness
-- ✅ Comparing model performance with different preprocessing techniques
-
-### ⚡ Performance Optimization
-- ✅ Multiprocessing for faster image batch processing
-- ✅ Vectorization techniques with NumPy for efficiency
-- ✅ GPU acceleration with CUDA for image processing
-- ✅ Memory management strategies for large datasets
-
-### 🔧 Tools & Integration
-- ✅ Building a command-line interface (CLI) image toolkit
-- ✅ Combining traditional CV with deep learning approaches
-- ✅ **Implement and optimize PaDiM anomaly detection for industrial defects**
-- ✅ Packaging and distributing your CV tools
+#### 🔍 Python & Computer Vision Fundamentals
+#### 📁 Dataset Management & Organization
+#### 🖼️ Image Preprocessing & Manipulation
+#### 🧮 Essential CV Algorithms
+#### 🔄 Advanced Computer Vision Techniques
+#### 🎭 Data Augmentation & Simulation
+#### 📊 Analysis & Validation
+#### ⚡ Performance Optimization
+#### 🔧 Tools & Integration
 
 ## 🚀 By the End, You'll Have:
 A fully working `cv_toolkit.py` script that lets you run commands like:
@@ -83,15 +39,15 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 
 - [🧠 Python for Computer Vision: Build Your Own Image Toolkit from Scratch](#-python-for-computer-vision-build-your-own-image-toolkit-from-scratch)
   - [✅ What You'll Learn](#-what-youll-learn)
-    - [🔍 Python \& Computer Vision Fundamentals](#-python--computer-vision-fundamentals)
-    - [📁 Dataset Management \& Organization](#-dataset-management--organization)
-    - [🖼️ Image Preprocessing \& Manipulation](#️-image-preprocessing--manipulation)
-    - [🧮 Essential CV Algorithms](#-essential-cv-algorithms)
-    - [🔄 Advanced Computer Vision Techniques](#-advanced-computer-vision-techniques)
-    - [🎭 Data Augmentation \& Simulation](#-data-augmentation--simulation)
-    - [📊 Analysis \& Validation](#-analysis--validation)
-    - [⚡ Performance Optimization](#-performance-optimization)
-    - [🔧 Tools \& Integration](#-tools--integration)
+      - [🔍 Python \& Computer Vision Fundamentals](#-python--computer-vision-fundamentals)
+      - [📁 Dataset Management \& Organization](#-dataset-management--organization)
+      - [🖼️ Image Preprocessing \& Manipulation](#️-image-preprocessing--manipulation)
+      - [🧮 Essential CV Algorithms](#-essential-cv-algorithms)
+      - [🔄 Advanced Computer Vision Techniques](#-advanced-computer-vision-techniques)
+      - [🎭 Data Augmentation \& Simulation](#-data-augmentation--simulation)
+      - [📊 Analysis \& Validation](#-analysis--validation)
+      - [⚡ Performance Optimization](#-performance-optimization)
+      - [🔧 Tools \& Integration](#-tools--integration)
   - [🚀 By the End, You'll Have:](#-by-the-end-youll-have)
   - [💡 Perfect For:](#-perfect-for)
   - [📚 Table of Contents](#-table-of-contents)

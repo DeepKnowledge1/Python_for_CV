@@ -20,3 +20,29 @@ Welcome to the beginning of your computer vision journey! This section lays the 
 | 7     | 🧭 Course Roadmap – How to Get the Most Out of This Playlist            |
 
 👉 By the end of this section, you'll have a clean Python development environment, a clear understanding of CV's relevance, and your first working image script!
+
+
+
+# Installing Python & Tools You Need – With Common Pitfalls & Fixes
+
+#### 📥 Install `pyenv-win`
+
+
+```powershell
+git clone https://github.com/pyenv-win/pyenv-win.git $HOME\.pyenv
+setx PYENV $HOME\.pyenv
+setx PATH "$env:PYENV\bin;$env:PYENV\shims;$env:PATH"
+```
+
+
+### 🔁 Most Important `pyenv` Commands
+
+```bash
+pyenv install <version>      # install a new version
+pyenv uninstall <version>    # remove a version
+pyenv versions               # list installed versions
+pyenv global <version>       # set default
+pyenv local <version>        # set per-project
+pyenv shell <version>        # set for current shell only
+pyenv rehash                 # rebuild shims after installing pip packages
+```
