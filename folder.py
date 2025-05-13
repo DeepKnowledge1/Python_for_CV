@@ -21,7 +21,7 @@ sections = [
     "Sec17_Optimizing_PaDiM",
     "Sec18_Model_Validation",
     "Sec19_Final_Project",
-    "Sec20_Bonus_Tips"
+    "Sec20_Bonus_Tips",
 ]
 
 # Create folders and README.md files for each section
@@ -35,13 +35,20 @@ for section in sections:
     # Create section folder
     section_folder = os.path.join(base_path, section)
     os.makedirs(section_folder, exist_ok=True)
-    
+
     # Prepare the content for the README.md file
-    readme_content = f"# {section.replace('_', ' ').title()}\n\nThis is the README file for the {section.replace('_', ' ').title()}.\n\n### Overview:\nProvide an overview of the section content here.\n"
-    
+
+    section_title = section.replace("_", " ").title()
+    readme_content = (
+        f"# {section_title}\n\n"
+        f"This is the README file for the {section_title}.\n\n"
+        "### Overview:\n"
+        "Provide an overview of the section content here.\n"
+    )
+
     # Write the README.md file inside the section folder
     readme_path = os.path.join(section_folder, "README.md")
-    with open(readme_path, 'w') as readme_file:
+    with open(readme_path, "w") as readme_file:
         readme_file.write(readme_content)
 
 print("Folders and README.md files created successfully.")

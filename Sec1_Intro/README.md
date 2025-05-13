@@ -74,5 +74,3 @@ pyenv rehash                 # rebuild shims after installing pip packages
 | ⚙️ Plugin Management | `poetry self add plugin`                                      | Add official plugin                        | `poetry self add poetry-plugin-export`                        |
 
 ---
-
-Let me know if you'd like this in Markdown, PDF, or as a printable poster!

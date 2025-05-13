@@ -25,10 +25,10 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 ```
 
 ## 💡 Perfect For:
-- 🔍 Aspiring computer vision engineers  
-- 🤖 AI/ML developers who struggle with image prep  
-- 🛠️ Python devs looking to break into CV  
-- 💡 Anyone building personal or production-level vision projects  
+- 🔍 Aspiring computer vision engineers
+- 🤖 AI/ML developers who struggle with image prep
+- 🛠️ Python devs looking to break into CV
+- 💡 Anyone building personal or production-level vision projects
 
 ---
 
@@ -87,9 +87,10 @@ This section introduces the course and sets the stage for what's to come. Learne
 
 | Video | Title                                                                   |
 | ----- | ----------------------------------------------------------------------- |
-| 2     | 📦 What is Computer Vision & Why Python? + Real-World Use Cases         |
-| 3     | 🛠️ Installing Python & Tools You Need – With Common Pitfalls & Fixes   |
-| 4     | 🎵 Modern Dependency Management with Poetry                             |
+| 1     | 📦 Introduction    [🎥 Watch Video](https://youtu.be/tAumg8Odcm4) | [💻 Code Example](No)     |
+| 2     | 📦 What is Computer Vision & Why Python? + Real-World Use Cases    [🎥 Watch Video](https://youtu.be/trL2qIfpY3U) | [💻 Code Example](No)     |
+| 3     | 🛠️ Installing Python & Tools You Need – With Common Pitfalls & Fixes [🎥 Watch Video](https://youtu.be/ocVk_B-ivHQ) | [💻 Code Example](No)   |
+| 4     | 🎵 Modern Dependency Management with Poetry [🎥 Watch Video](https://youtu.be/F5sdNXb2P98) | [💻 Code Example]("No")|
 | 5     | 🔍 Code Quality with Pre-commit Hooks                                   |
 | 6     | 🧪 Running Your First Image Script – "Hello World" for CV               |
 | 7     | 🧭 Course Roadmap – How to Get the Most Out of This Playlist            |
