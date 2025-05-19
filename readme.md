@@ -91,7 +91,7 @@ This section introduces the course and sets the stage for what's to come. Learne
 | 2     | 📦 What is Computer Vision & Why Python? + Real-World Use Cases    [🎥 Watch Video](https://youtu.be/trL2qIfpY3U) | [💻 Code Example](No)     |
 | 3     | 🛠️ Installing Python & Tools You Need – With Common Pitfalls & Fixes [🎥 Watch Video](https://youtu.be/ocVk_B-ivHQ) | [💻 Code Example](No)   |
 | 4     | 🎵 Modern Dependency Management with Poetry [🎥 Watch Video](https://youtu.be/F5sdNXb2P98) | [💻 Code Example]("No")|
-| 5     | 🔍 Code Quality with Pre-commit Hooks                                   |
+| 5     | 🔍 Code Quality with Pre-commit Hooks [🎥 Watch Video](https://youtu.be/yLKmW7zjTwM)                                  |
 | 6     | 🧪 Running Your First Image Script – "Hello World" for CV               |
 | 7     | 🧭 Course Roadmap – How to Get the Most Out of This Playlist            |
 
@@ -101,15 +101,17 @@ This section introduces the course and sets the stage for what's to come. Learne
 
 This section focuses on essential Python concepts required for image processing. It covers variables, loops, functions, and other key basics.
 
-| Video | Title                                                          |
-| ----- | -------------------------------------------------------------- |
-| 8     | 🔢 Variables, Numbers & Strings  |
-| 9     | 📋 Lists, Tuples & Dictionaries |
-| 10    | ➡️ If Statements & Loops   |
-| 11    | 🔁 Functions |
-| 12    | 🖼️ Reading Input & Displaying Output|
-| 13    | 🏫 Mini Project: Resize Multiple Images with a Function        |
-| 14    | 🧪 Quiz Time: Test Your Python Knowledge So Far                |
+
+| Video | Title                                                          | Code Example                                      |
+| ----- | -------------------------------------------------------------- | ------------------------------------------------- |
+| 8     | 🔢 Variables, Numbers & Strings [🎥 Watch Video](https://youtu.be/2cp5OEHMoNQ) | [💻 Code Example](Sec2_Core_Python_CV/Variables_Numbers_Strings_CV.ipynb) |
+| 9     | 📋 Lists, Tuples & Dictionaries                                |                                                   |
+| 10    | ➡️ If Statements & Loops                                       |                                                   |
+| 11    | 🔁 Functions                                                   |                                                   |
+| 12    | 🖼️ Reading Input & Displaying Output                           |                                                   |
+| 13    | 🏫 Mini Project: Resize Multiple Images with a Function        |                                                   |
+| 14    | 🧪 Quiz Time: Test Your Python Knowledge So Far                |                                                   |
+
 
 ---
 
