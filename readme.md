@@ -105,8 +105,8 @@ This section focuses on essential Python concepts required for image processing.
 | Video | Title                                                          | Code Example                                      |
 | ----- | -------------------------------------------------------------- | ------------------------------------------------- |
 | 8     | 🔢 Variables, Numbers & Strings [🎥 Watch Video](https://youtu.be/2cp5OEHMoNQ) | [💻 Code Example](Sec2_Core_Python_CV/Variables_Numbers_Strings_CV.ipynb) |
-| 9     | 📋 Lists, Tuples & Dictionaries                                |                                                   |
-| 10    | ➡️ If Statements & Loops                                       |                                                   |
+| 9     | ➡️ If Statements & Loops      [🎥 Watch Video](https://youtu.be/HpEgJsQHFWY) | [💻 Code Example](Sec2_Core_Python_CV/IF_LOOP.ipynb) |
+| 10    | 📋 Lists, Tuples & Dictionaries                                       |                                                   |
 | 11    | 🔁 Functions                                                   |                                                   |
 | 12    | 🖼️ Reading Input & Displaying Output                           |                                                   |
 | 13    | 🏫 Mini Project: Resize Multiple Images with a Function        |                                                   |
