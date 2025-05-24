@@ -92,7 +92,7 @@ This section introduces the course and sets the stage for what's to come. Learne
 | 3     | 🛠️ Installing Python & Tools You Need – With Common Pitfalls & Fixes [🎥 Watch Video](https://youtu.be/ocVk_B-ivHQ) | [💻 Code Example](No)   |
 | 4     | 🎵 Modern Dependency Management with Poetry [🎥 Watch Video](https://youtu.be/F5sdNXb2P98) | [💻 Code Example]("No")|
 | 5     | 🔍 Code Quality with Pre-commit Hooks [🎥 Watch Video](https://youtu.be/yLKmW7zjTwM)                                  |
-| 6     | 🧪 Running Your First Image Script – "Hello World" for CV               |
+| 6     | 🧪 Running Your First Image Script – "Hello World" for CV  [🎥 Watch Video](https://youtu.be/JUHTCel4U4E  )            |
 | 7     | 🧭 Course Roadmap – How to Get the Most Out of This Playlist            |
 
 ---
@@ -106,8 +106,10 @@ This section focuses on essential Python concepts required for image processing.
 | ----- | -------------------------------------------------------------- | ------------------------------------------------- |
 | 8     | 🔢 Variables, Numbers & Strings [🎥 Watch Video](https://youtu.be/2cp5OEHMoNQ) | [💻 Code Example](Sec2_Core_Python_CV/Variables_Numbers_Strings_CV.ipynb) |
 | 9     | ➡️ If Statements & Loops      [🎥 Watch Video](https://youtu.be/HpEgJsQHFWY) | [💻 Code Example](Sec2_Core_Python_CV/IF_LOOP.ipynb) |
-| 10    | 📋 Lists, Tuples & Dictionaries                                       |                                                   |
-| 11    | 🔁 Functions                                                   |                                                   |
+| 10.1    | 📋 Lists[🎥 Watch Video](https://youtu.be/svcXGLx7PIY) | [💻 Code Example](Sec2_Core_Python_CV/lists.ipynb) |
+| 10.2    | 📋 Tuple[🎥 Watch Video](https://youtu.be/u45nm0G2Wbg) | [💻 Code Example](Sec2_Core_Python_CV/tuples_notebook.ipynb) |
+| 10.3    | 📋 Dictionaries[🎥 Watch Video](https://youtu.be/HpEgJsQHFWY) | [💻 Code Example](Sec2_Core_Python_CV/dictionaries_notebook.ipynb) |
+| 11    | 🔁 Functions[🎥 Watch Video](https://youtu.be/zGBIQAHH168) | [💻 Code Example](Sec2_Core_Python_CV/functions_notebook.ipynb) |
 | 12    | 🖼️ Reading Input & Displaying Output                           |                                                   |
 | 13    | 🏫 Mini Project: Resize Multiple Images with a Function        |                                                   |
 | 14    | 🧪 Quiz Time: Test Your Python Knowledge So Far                |                                                   |
