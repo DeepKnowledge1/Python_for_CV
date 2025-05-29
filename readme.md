@@ -57,8 +57,8 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 | 10.2    | 📋 Tuple[🎥 Watch Video](https://youtu.be/u45nm0G2Wbg) | [💻 Code Example](Sec2_Core_Python_CV/tuples_notebook.ipynb) |
 | 10.3    | 📋 Dictionaries[🎥 Watch Video](https://youtu.be/HpEgJsQHFWY) | [💻 Code Example](Sec2_Core_Python_CV/dictionaries_notebook.ipynb) |
 | 11    | 🔁 Functions[🎥 Watch Video](https://youtu.be/zGBIQAHH168) | [💻 Code Example](Sec2_Core_Python_CV/functions_notebook.ipynb) |
-| 12    | 🔄 Working with Files & Directories [🎥 Watch Video] | [💻 Code Example] |
-| 13    | ⚠️ Error Handling & Debugging [🎥 Watch Video] | [💻 Code Example] |
+| 12    | 🔄 Working with Files & Directories [🎥 Watch Video](https://youtu.be/SX7hklop9gg) | [💻 Code Example](Sec2_Core_Python_CV/Files_DIR_%20Tutorial.ipynb) |
+| 13    | ⚠️ Error Handling & Debugging [🎥 Watch Video] (https://youtu.be/C6vlF4-xXm4)| [💻 Code Example](Sec2_Core_Python_CV/Error_handling.ipynb) |
 |14 |📊 🧪 Quiz Time: Test Your Python Knowledge So [🎥 Watch Video] | [💻 Code Example]
 
 
@@ -70,9 +70,9 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 
 | Video | Title                                                          | Code Example                                      |
 | ----- | -------------------------------------------------------------- | ------------------------------------------------- |
-| 15    | 📷 How Computers See Images - Pixels, RGB, Channels [🎥 Watch Video] | [💻 Code Example] |
-| 16    | 📥 Load & Show Images Using OpenCV & Pillow         [🎥 Watch Video] | [💻 Code Example] |
-| 17    | 📐 Basic Transformations: Resize, Crop, Rotate      [🎥 Watch Video] | [💻 Code Example] |
+| 15    | 📷 How Computers See Images - Pixels, RGB, Channels [🎥 Watch Video] _(https://youtu.be/mkel9UVOWSw)| [💻 Code Example] |
+| 16    | 📥 Load & Show Images Using OpenCV & Pillow         [🎥 Watch Video] (https://youtu.be/a9ITIB2TFoI)  | [💻 Code Example](Sec3_Working_with_Images/OpenCV_PILLOW.ipynb) |
+| 17    | 📐 Basic Transformations: Resize, Crop, Rotate      [🎥 Watch Video] (https://youtu.be/tOqTAG3i2_o) | [💻 Code Example](Sec3_Working_with_Images/OpenCV_PILLOW_Advance.ipynb) |
 | 18    | 🌈 Understanding Color Spaces                       [🎥 Watch Video] | [💻 Code Example] |
 | 19    | 📸 Mini Project: Simple Image Processing            [🎥 Watch Video] | [💻 Code Example] |
 
