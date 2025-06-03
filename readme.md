@@ -74,7 +74,7 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 | 16    | 📥 Load & Show Images Using OpenCV & Pillow [🎥 Watch Video](https://youtu.be/a9ITIB2TFoI) | [💻 Code Example](Sec3_Working_with_Images/OpenCV_PILLOW.ipynb) |
 | 17    | 📐 Basic Transformations: Resize, Crop, Rotate      [🎥 Watch Video](https://youtu.be/tOqTAG3i2_o) | [💻 Code Example](Sec3_Working_with_Images/OpenCV_PILLOW_Advance.ipynb) |
 | 18    | 🌈 Understanding Color Spaces                       [🎥 Watch Video](https://youtu.be/HLSIKaqfyKs)| [💻 Code Example](Sec3_Working_with_Images/color_spaces_tutorial.ipynb) |
-| 19    | 📸 Mini Project: Simple Image Processing            [🎥 Watch Video]| [💻 Code Example] |
+| 19    | 📸 Mini Project: Simple Image Processing            [🎥 Watch Video(https://youtu.be/TaQH8pXRzTw)]| [💻 Code Example](Sec3_Working_with_Images/sec3_project.py) |
 
 ### PART 2: BUILDING BLOCKS
 
@@ -83,22 +83,22 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 
 | Video | Title                                                                      | Code Example                                      |
 | ----- | -------------------------------------------------------------------------- | ------------------------------------------------- |
-| 20    | 🚪 What is OOP? Why It Matters for Computer Vision                         [🎥 Watch Video]| [💻 Code Example] |
-| 21    | 📦 Classes vs Functions – When to Use Which                                [🎥 Watch Video]| [💻 Code Example] |
-| 22    | 🛠️ Defining Your First Class: `ImageProcessor`                            [🎥 Watch Video]| [💻 Code Example] |
-| 23    | 🧱 Attributes & Methods – Organizing Image Transformations                 [🎥 Watch Video]| [💻 Code Example] |
-| 24    | 🗝️ Constructors (`__init__`) and Default Settings                         [🎥 Watch Video]| [💻 Code Example] |
-| 25    | 🔁 Inheritance – Build Specialized Processors from Base Classes            [🎥 Watch Video]| [💻 Code Example] |
-| 26    | 🎯 Mini Project: Build an Image Processor with Load–Transform–Save Methods [🎥 Watch Video]| [💻 Code Example] |
-| 27    | 🧙 Magic Methods (Dunder) – Customize Behavior with `__str__`, `__add__`, `__eq__`, etc. |                                     |
-| 28    | 🎁 Data Classes – Say Goodbye to Boilerplate with `@dataclass`             [🎥 Watch Video]| [💻 Code Example] |
-| 29    | 🧭 Class vs Static vs Instance Methods – When and Why to Use Each          [🎥 Watch Video]| [💻 Code Example] |
+| 20    | 🚪 What is OOP? Why It Matters for Computer Vision                         [🎥 Watch Video](https://youtu.be/KMQqxsimMBU)|  |
+| 21    | 📦 Classes vs Functions – When to Use Which                                [🎥 Watch Video]| [💻 Code Example](Sec4_OOP_in_CV/02_classes_vs_functions.ipynb) |
+| 22    | 🛠️ Defining Your First Class                            [🎥 Watch Video](https://youtu.be/kI_JrnydPzI)| [💻 Code Example](Sec4_OOP_in_CV/python_classes.ipynb) |
+| 23    | 🧱 Attributes & Methods – Organizing Image Transformations[🎥 Watch Video](https://youtu.be/kI_JrnydPzI)| [💻 Code Example](Sec4_OOP_in_CV/python_classes.ipynb) |
+| 24    | 🗝️ Constructors (`__init__`) and Default Settings[🎥 Watch Video](https://youtu.be/kI_JrnydPzI)| [💻 Code Example](Sec4_OOP_in_CV/python_classes.ipynb) |
+| 25    | 🎯 Mini Project: Build an Image Processor with Load–Transform–Save Methods [🎥 Watch Video]| [💻 Code Example] |
 
 #### 📁 Section 4A: Advanced Pythonic OOP
-*Videos 30-36*
+*Videos 26-36*
 
 | Video | Title                                                                      | Code Example                                      |
 | ----- | -------------------------------------------------------------------------- | ------------------------------------------------- |
+| 25    | 🔁 Inheritance – Build Specialized Processors from Base Classes            [🎥 Watch Video]| [💻 Code Example] |
+| 27    | 🧙 Magic Methods (Dunder) – Customize Behavior with `__str__`, `__add__`, `__eq__`, etc. |                                     |
+| 28    | 🎁 Data Classes – Say Goodbye to Boilerplate with `@dataclass`             [🎥 Watch Video]| [💻 Code Example] |
+| 29    | 🧭 Class vs Static vs Instance Methods – When and Why to Use Each          [🎥 Watch Video]| [💻 Code Example] |
 | 30    | 🔐 Encapsulation & Property Decorators – Clean Access with `@property` and Getters/Setters |                                   |
 | 31    | 🌀 Polymorphism – Use One Interface with Many Implementations              [🎥 Watch Video]| [💻 Code Example] |
 | 32    | 🧱 Abstract Base Classes – Enforce Rules Using `abc.ABC` and `@abstractmethod` |                                               |
