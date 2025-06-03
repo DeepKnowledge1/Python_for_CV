@@ -6,12 +6,19 @@
 #### 📁 Section 4: Object-Oriented Programming for CV
 *Videos 20-29*
 
-<img src="oop.png" alt="oop" width="60%" /></a>
+<center>
+
+![padim_pipeline](./oop.png)
+</center>
 
 
 
+<center>
 
-<img src="oop1.png" alt="oop" width="60%" /></a>
+![padim_pipeline](./oop1.png)
+</center>
+
+
 
 
 | Video | Title                                                                      |  |
