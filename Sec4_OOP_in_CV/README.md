@@ -8,14 +8,14 @@
 
 <center>
 
-![padim_pipeline](./oop.png)
+![OOP](./oop.png)
 </center>
 
 
 
 <center>
 
-![padim_pipeline](./oop1.png)
+![OOP](./oop1.png)
 </center>
 
 
