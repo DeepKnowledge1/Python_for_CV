@@ -2,7 +2,7 @@
 
 A hands-on course where you'll learn how to **build your own image processing toolkit in Python**, tailored for **real-world computer vision tasks**. From loading images to simulating defects and preparing datasets for deep learning — this course gives you the tools to do it all (and ship your own CLI tool at the end!).
 
-<img src="bg.png" alt="bg" width="60%" /></a>
+<img src="bg.png" alt="bg" width="80%" /></a>
 
 ## ✅ What You'll Learn
 
