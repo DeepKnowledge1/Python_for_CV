@@ -6,19 +6,8 @@
 #### 📁 Section 4: Object-Oriented Programming for CV
 *Videos 20-29*
 
-<center>
-
-![OOP](./oop.png)
-</center>
-
-
-
-<center>
-
-![OOP](./oop1.png)
-</center>
-
-
+<img src="oop.png" alt="oop" width="60%" /></a>
+<img src="oop1.png" alt="oop" width="60%" /></a>
 
 
 | Video | Title                                                                      |  |
