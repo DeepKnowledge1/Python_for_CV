@@ -16,6 +16,14 @@ import os
 # 12. `detect_edges`: Detect edges in the image using the Canny edge detector
 
 
+# BaseImageProcessor
+# BasicImageProcessor
+# FilterProcessor
+# EdgeDetectionProcessor
+# AdvancedPorcessor
+# AnomalyProcessor
+
+
 def display_image(image, title="Image"):
     cv2.imshow(title, image)
     cv2.waitKey(0)
