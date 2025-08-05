@@ -105,9 +105,9 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 | ----- | -------------------------------------------------------------------------- | ------------------------------------------------- |
 | ✅ | 🔁 Inheritance – Build Specialized Processors from Base Classes            [🎥 Watch Video](https://youtu.be/I6StdtxXBSM)| [💻 Code Example](Sec4Adv_OOP_CV/python_inheritance.ipynb) |
 | ✅ | 🔁 Inheritance – Refactoring Image Processor            [🎥 Watch Video](https://youtu.be/OhSswFAM-Ag)| [💻 Code Example](Sec4Adv_OOP_CV/Interitance_refactoring/) |
-| 🔄 | 🧙 Magic Methods (Dunder) – Customize Behavior with `__str__`, `__add__`, `__eq__`, etc. |                                     |
-| 🔄 | 🎁 Data Classes – Say Goodbye to Boilerplate with `@dataclass`             [🎥 Watch Video]| [💻 Code Example] |
-| 🔄 | 🧭 Class vs Static vs Instance Methods – When and Why to Use Each          [🎥 Watch Video]| [💻 Code Example] |
+| ✅ | 🧙 Magic Methods (Dunder) – Customize Behavior with `__str__`, `__add__`, `__eq__`, etc. [🎥 Watch Video](https://youtu.be/ctgmy5gwyIM)| [💻 Code Example](Sec4Adv_OOP_CV/magic_methods.ipynb) |
+| ✅ | 🎁 Data Classes – Say Goodbye to Boilerplate with `@dataclass`             [🎥 Watch Video](https://youtu.be/fGvyJbKoWP0)| [💻 Code Example](Sec4Adv_OOP_CV/data_class.ipynb) |
+| 🔄 | 🧭 Class vs Static vs Instance Methods – When and Why to Use Each          [🎥 Watch Video]| [💻 Code Example]() |
 | 🔄 | 🔐 Encapsulation & Property Decorators – Clean Access with `@property` and Getters/Setters |                                   |
 | 🔄 | 🌀 Polymorphism – Use One Interface with Many Implementations              [🎥 Watch Video]| [💻 Code Example] |
 | 🔄 | 🧱 Abstract Base Classes – Enforce Rules Using `abc.ABC` and `@abstractmethod` |                                               |
