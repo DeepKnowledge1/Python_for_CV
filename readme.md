@@ -107,10 +107,10 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 | ✅ | 🔁 Inheritance – Refactoring Image Processor            [🎥 Watch Video](https://youtu.be/OhSswFAM-Ag)| [💻 Code Example](Sec4Adv_OOP_CV/Interitance_refactoring/) |
 | ✅ | 🧙 Magic Methods (Dunder) – Customize Behavior with `__str__`, `__add__`, `__eq__`, etc. [🎥 Watch Video](https://youtu.be/ctgmy5gwyIM)| [💻 Code Example](Sec4Adv_OOP_CV/magic_methods.ipynb) |
 | ✅ | 🎁 Data Classes – Say Goodbye to Boilerplate with `@dataclass`             [🎥 Watch Video](https://youtu.be/fGvyJbKoWP0)| [💻 Code Example](Sec4Adv_OOP_CV/data_class.ipynb) |
-| 🔄 | 🧭 Class vs Static vs Instance Methods – When and Why to Use Each          [🎥 Watch Video]| [💻 Code Example]() |
-| 🔄 | 🔐 Encapsulation & Property Decorators – Clean Access with `@property` and Getters/Setters |                                   |
-| 🔄 | 🌀 Polymorphism – Use One Interface with Many Implementations              [🎥 Watch Video]| [💻 Code Example] |
-| 🔄 | 🧱 Abstract Base Classes – Enforce Rules Using `abc.ABC` and `@abstractmethod` |                                               |
+| ✅ | 🧭 Class vs Static vs Instance Methods – When and Why to Use Each          [🎥 Watch Video](https://youtu.be/HFZ5bccoSjs)| [💻 Code Example](Sec4Adv_OOP_CV/class_vs_static_vs_instance_methods.ipynb) |
+| ✅ | 🔐 Encapsulation & Property Decorators – Clean Access with `@property` and Getters/Setters [🎥 Watch Video](https://youtu.be/jIHatxrjTnw)| [💻 Code Example](Sec4Adv_OOP_CV/encapsulation_property_tutorial.ipynb) |
+| ✅ | 🌀 Polymorphism – Use One Interface with Many Implementations              [🎥 Watch Video](https://youtu.be/thQQMhhN2qg)| [💻 Code Example](Sec4Adv_OOP_CV/Polymorphism_Tutorial.ipynb) |
+| ✅ | 🧱 Abstract Base Classes – Enforce Rules Using `abc.ABC` and `@abstractmethod` [🎥 Watch Video](https://youtu.be/aApWcItBbyE)| [💻 Code Example](Sec4Adv_OOP_CV/Abstract_Base_Classes_Tutorial.ipynb) |
 | 🔄 | 🧰 Composition Over Inheritance – "Has-a" Relationships for Real-World Modeling |                                              |
 | 🔄 | 💼 Build a Professional-Grade `ImagePipeline` Class                        [🎥 Watch Video]| [💻 Code Example] |
 | 🔄 | 🔄 OOP Design Patterns for Computer Vision Applications                    [🎥 Watch Video]| [💻 Code Example] |
