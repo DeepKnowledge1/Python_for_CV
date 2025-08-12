@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sobel Edge Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/black.css">
+  <style>
+    .highlight { color: #00ffae; font-weight: bold; }
+    .code { background: #111; color: #0f0; padding: 10px; border-radius: 5px; }
+    img { max-height: 400px; }
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <section>
+      <h1>🚀 Sobel Edge Detection</h1>
+      <h3 class="highlight">Reveal the Hidden Edges in Any Image!</h3>
+    </section>
+
+    <section>
+      <h2>🤔 What Is Edge Detection?</h2>
+      <ul>
+        <li>Finds where pixel intensity <span class="highlight">changes sharply</span></li>
+        <li>Helps detect shapes, borders, and objects</li>
+        <li>Used in self-driving cars, medical imaging, inspection, and more</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🎯 Meet the Sobel Operator</h2>
+      <p>A simple 3×3 filter to detect image gradients</p>
+      <pre class="code">Sobel X:
+[-1  0  1]
+[-2  0  2]
+[-1  0  1]</pre>
+      <pre class="code">Sobel Y:
+[-1 -2 -1]
+[ 0  0  0]
+[ 1  2  1]</pre>
+    </section>
+
+    <section>
+      <h2>🔍 How It Works</h2>
+      <ul>
+        <li>Slide the kernel over the image</li>
+        <li>Measure <span class="highlight">change in intensity</span></li>
+        <li>High change = Edge</li>
+      </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Sobel_gradient_operator.png/800px-Sobel_gradient_operator.png" alt="Sobel Diagram">
+    </section>
+
+    <section>
+      <h2>🧮 Numerical Example</h2>
+      <p>3×3 patch:</p>
+      <pre class="code">[100 100 100]
+[150 150 150]
+[200 200 200]</pre>
+      <p>Sobel Y → <span class="highlight">|G| = √(0² + 400²) = 400</span></p>
+    </section>
+
+    <section>
+      <h2>📐 Horizontal vs Vertical Edges</h2>
+      <p>
+        Sobel X → vertical edges<br>
+        Sobel Y → horizontal edges
+      </p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sobel_operator_in_diagonal_direction.svg/1200px-Sobel_operator_in_diagonal_direction.svg.png" alt="Edges">
+    </section>
+
+    <section>
+      <h2>💻 Python in 3 Lines</h2>
+      <pre class="code">
+import cv2
+sx = cv2.Sobel(img, cv2.CV_64F, 1, 0)
+sy = cv2.Sobel(img, cv2.CV_64F, 0, 1)
+mag = cv2.magnitude(sx, sy)
+      </pre>
+    </section>
+
+    <section>
+      <h2>⚖️ Sobel vs Others</h2>
+      <ul>
+        <li><span class="highlight">Sobel</span> – Balanced, smooth</li>
+        <li>Prewitt – Simpler, noisier</li>
+        <li>Scharr – High accuracy</li>
+        <li>Canny – Clean but complex</li>
+      </ul>
+    </section>
+
+    <section>
+      <h1>👏 That’s Sobel!</h1>
+      <p>Start detecting edges like a computer vision pro.</p>
+      <p class="highlight">Edge by edge, we shape the world.</p>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://unpkg.com/reveal.js/dist/reveal.min.js"></script>
+<script>
+  Reveal.initialize({ center: true, hash: true });
+</script>
+</body>
+</html>

@@ -111,10 +111,10 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 | ✅ | 🔐 Encapsulation & Property Decorators – Clean Access with `@property` and Getters/Setters [🎥 Watch Video](https://youtu.be/jIHatxrjTnw)| [💻 Code Example](Sec4Adv_OOP_CV/encapsulation_property_tutorial.ipynb) |
 | ✅ | 🌀 Polymorphism – Use One Interface with Many Implementations              [🎥 Watch Video](https://youtu.be/thQQMhhN2qg)| [💻 Code Example](Sec4Adv_OOP_CV/Polymorphism_Tutorial.ipynb) |
 | ✅ | 🧱 Abstract Base Classes – Enforce Rules Using `abc.ABC` and `@abstractmethod` [🎥 Watch Video](https://youtu.be/aApWcItBbyE)| [💻 Code Example](Sec4Adv_OOP_CV/Abstract_Base_Classes_Tutorial.ipynb) |
-| 🔄 | 🧰 Composition Over Inheritance – "Has-a" Relationships for Real-World Modeling |                                              |
-| 🔄 | 💼 Build a Professional-Grade `ImagePipeline` Class                        [🎥 Watch Video]| [💻 Code Example] |
+| ✅ | 🤯 Only 1% of Python Devs Use This: The Hidden Power of Metaclasses 🔐 [🎥 Watch Video](https://youtu.be/CjlCkKpQ4T4)| [💻 Code Example](Sec4Adv_OOP_CV/custum_metaclass.py) |
+| ✅ | 🧰 Composition Over Inheritance – "Has-a" Relationships for Real-World Modeling [🎥 Watch Video](https://youtu.be/rPBNrhVxl3k)| [💻 Code Example](Sec4Adv_OOP_CV/composition_over_inheritance.ipynb) |
+| 🔄 | 💼 Build a Professional-Grade `ImagePipeline` Class                        [🎥 Watch Video]| [💻 Code Example](Sec4Adv_OOP_CV/composition_over_inheritance.ipynb) |
 | 🔄 | 🔄 OOP Design Patterns for Computer Vision Applications                    [🎥 Watch Video]| [💻 Code Example] |
-| 🔄 | 📝 Mini Project: Complete OOP-Based Image Processing Library               [🎥 Watch Video]| [💻 Code Example] |
 
 #### 📁 Section 5: Working with Image Files & Folders
 *Videos 37-43*
