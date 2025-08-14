@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canny Edge Detection Tutorial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .step h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        .grid-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .grid-wrapper {
+            text-align: center;
+        }
+
+        .grid {
+            display: inline-grid;
+            grid-template-columns: repeat(8, 40px);
+            grid-template-rows: repeat(8, 40px);
+            gap: 1px;
+            border: 2px solid #34495e;
+            background-color: #34495e;
+            margin: 10px;
+        }
+
+        .cell {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .controls button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .controls button:hover {
+            background: #2980b9;
+        }
+
+        .slider-container {
+            margin: 10px;
+        }
+
+        .formula {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .example {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .note {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .matrix {
+            display: inline-block;
+            margin: 10px;
+            border: 2px solid #2c3e50;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .matrix table {
+            border-collapse: collapse;
+        }
+
+        .matrix td {
+            border: 1px solid #bdc3c7;
+            padding: 8px;
+            text-align: center;
+            min-width: 30px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Canny Edge Detection Tutorial</h1>
+        <p>Step-by-step guide with visual examples and numerical calculations</p>
+    </div>
+
+    <div class="controls">
+        <h3>Interactive Parameters</h3>
+        <div class="slider-container">
+            <label>Low Threshold: <input type="range" id="lowThresh" min="30" max="80" value="50"> <span id="lowVal">50</span></label>
+        </div>
+        <div class="slider-container">
+            <label>High Threshold: <input type="range" id="highThresh" min="90" max="150" value="100"> <span id="highVal">100</span></label>
+        </div>
+        <button onclick="runCanny()">Run Canny Algorithm</button>
+        <button onclick="resetAll()">Reset</button>
+    </div>
+
+    <div class="step">
+        <h2>Step 0: Original Image</h2>
+        <p>We start with an 8×8 grayscale image. Each pixel has intensity from 0 (black) to 255 (white).</p>
+
+        <div class="grid-container">
+            <div class="grid-wrapper">
+                <h4>Original Image</h4>
+                <div id="original" class="grid"></div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h4>Sample Data Matrix:</h4>
+            <div class="matrix">
+                <table id="dataMatrix"></table>
+            </div>
+            <p>Notice the clear edge between columns 3-4 where intensity jumps from ~50 to ~200.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Step 1: Gaussian Blur</h2>
+        <p>Apply Gaussian filter to reduce noise while preserving edges.</p>
+
+        <div class="formula">
+            Gaussian Kernel (3×3):
+            [1  2  1]
+            [2  4  2]  ÷ 16
+            [1  2  1]
+        </div>
+
+        <div class="grid-container">
+            <div class="grid-wrapper">
+                <h4>After Gaussian Blur</h4>
+                <div id="blurred" class="grid"></div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h4>Calculation Example:</h4>
+            <p>For pixel (1,1): multiply 3×3 neighborhood by kernel, sum, divide by 16</p>
+            <div class="formula">
+                Result = (1×50 + 2×50 + 1×55 + 2×50 + 4×55 + 2×200 + 1×55 + 2×200 + 1×205) ÷ 16 = 118
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Step 2: Gradient Calculation</h2>
+        <p>Calculate intensity gradients using Sobel operators to find edge strength and direction.</p>
+
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+            <div class="matrix">
+                <h4>Sobel X</h4>
+                <table>
+                    <tr><td>-1</td><td>0</td><td>1</td></tr>
+                    <tr><td>-2</td><td>0</td><td>2</td></tr>
+                    <tr><td>-1</td><td>0</td><td>1</td></tr>
+                </table>
+            </div>
+            <div class="matrix">
+                <h4>Sobel Y</h4>
+                <table>
+                    <tr><td>-1</td><td>-2</td><td>-1</td></tr>
+                    <tr><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>2</td><td>1</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="grid-wrapper">
+                <h4>Gradient Magnitude</h4>
+                <div id="magnitude" class="grid"></div>
+            </div>
+        </div>
+
+        <div class="formula">
+            Magnitude = √(Gx² + Gy²)<br>
+            Direction = arctan(Gy/Gx)
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Step 3: Non-Maximum Suppression</h2>
+        <p>This step <strong>thins thick edges</strong> by keeping only the pixels with maximum gradient magnitude along the gradient direction. This creates thin, well-defined single-pixel-wide edges.</p>
+
+        <div class="example">
+            <h4>Why is this needed?</h4>
+            <p>After gradient calculation, edges are often thick bands of high-magnitude pixels. We need to thin them to single-pixel lines for precise edge detection.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="grid-wrapper">
+                <h4>Before Suppression</h4>
+                <div id="beforeNMS" class="grid"></div>
+                <p><small>Thick edges with multiple high-magnitude pixels</small></p>
+            </div>
+            <div class="grid-wrapper">
+                <h4>After Suppression</h4>
+                <div id="afterNMS" class="grid"></div>
+                <p><small>Thin, single-pixel-wide edges</small></p>
+            </div>
+        </div>
+
+        <div class="example">
+            <h4>Detailed Algorithm:</h4>
+            <p><strong>Step 1:</strong> For each pixel, determine its gradient direction</p>
+            <p><strong>Step 2:</strong> Round the direction to one of four angles:</p>
+            <ul>
+                <li><strong>0° (Horizontal):</strong> Compare with left and right neighbors</li>
+                <li><strong>45° (Diagonal /):</strong> Compare with top-right and bottom-left neighbors</li>
+                <li><strong>90° (Vertical):</strong> Compare with top and bottom neighbors</li>
+                <li><strong>135° (Diagonal \):</strong> Compare with top-left and bottom-right neighbors</li>
+            </ul>
+            <p><strong>Step 3:</strong> Keep pixel only if its magnitude is greater than both neighbors along the gradient direction</p>
+        </div>
+
+        <div class="formula">
+            <strong>Pseudocode:</strong><br>
+            For each pixel (i,j):<br>
+            &nbsp;&nbsp;direction = gradient_direction[i][j]<br>
+            &nbsp;&nbsp;magnitude = gradient_magnitude[i][j]<br>
+            &nbsp;&nbsp;neighbor1, neighbor2 = get_neighbors_along_direction(direction)<br>
+            &nbsp;&nbsp;if magnitude >= neighbor1 AND magnitude >= neighbor2:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;keep pixel<br>
+            &nbsp;&nbsp;else:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;suppress pixel (set to 0)
+        </div>
+
+        <div class="example">
+            <h4>Numerical Example:</h4>
+            <p>Consider a pixel with:</p>
+            <ul>
+                <li>Gradient magnitude = 150</li>
+                <li>Gradient direction = 0° (horizontal edge)</li>
+                <li>Left neighbor magnitude = 120</li>
+                <li>Right neighbor magnitude = 140</li>
+            </ul>
+            <p><strong>Decision:</strong> Since 150 > 120 AND 150 > 140, keep this pixel</p>
+            <br>
+            <p>Another pixel with:</p>
+            <ul>
+                <li>Gradient magnitude = 130</li>
+                <li>Gradient direction = 0° (horizontal edge)</li>
+                <li>Left neighbor magnitude = 140</li>
+                <li>Right neighbor magnitude = 125</li>
+            </ul>
+            <p><strong>Decision:</strong> Since 130 < 140, suppress this pixel (set to 0)</p>
+        </div>
+
+        <div class="note">
+            <strong>Key Benefits:</strong>
+            <br>• <strong>Precision:</strong> Edges become single-pixel lines instead of thick bands
+            <br>• <strong>Localization:</strong> Edge positions are more accurate
+            <br>• <strong>Noise Reduction:</strong> Eliminates weak edge responses near strong edges
+            <br>• <strong>Preparation:</strong> Sets up clean input for the thresholding step
+        </div>
+
+        <div class="example">
+            <h4>Visual Comparison:</h4>
+            <p><strong>Before NMS:</strong> You might see multiple adjacent pixels with high gradients forming thick edge bands</p>
+            <p><strong>After NMS:</strong> Only the pixel with the highest gradient along each direction survives, creating clean single-pixel edges</p>
+            <p>Look at the grids above - notice how the "After Suppression" grid has fewer non-zero values, but they're more precisely located at the true edge positions.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Step 4: Double Thresholding</h2>
+        <p>Classify pixels into strong edges, weak edges, and non-edges using two thresholds.</p>
+
+        <div class="grid-container">
+            <div class="grid-wrapper">
+                <h4>Strong Edges</h4>
+                <div id="strong" class="grid"></div>
+            </div>
+            <div class="grid-wrapper">
+                <h4>Weak Edges</h4>
+                <div id="weak" class="grid"></div>
+            </div>
+        </div>
+
+        <div class="formula">
+            Strong: magnitude ≥ high_threshold<br>
+            Weak: low_threshold ≤ magnitude < high_threshold<br>
+            Suppressed: magnitude < low_threshold
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Step 5: Hysteresis Edge Tracking</h2>
+        <p>Connect weak edges to strong edges to form continuous edge chains.</p>
+
+        <div class="grid-container">
+            <div class="grid-wrapper">
+                <h4>Before Hysteresis</h4>
+                <div id="beforeHyst" class="grid"></div>
+            </div>
+            <div class="grid-wrapper">
+                <h4>Final Edges</h4>
+                <div id="final" class="grid"></div>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Algorithm:</strong> Start with strong edges, recursively add connected weak edges, discard isolated weak edges.
+        </div>
+    </div>
+
+    <script>
+        // 8x8 sample image with clear vertical edge
+        const originalData = [
+            [50, 50, 55, 60, 200, 205, 210, 215],
+            [50, 55, 60, 65, 200, 205, 210, 215],
+            [55, 60, 65, 70, 205, 210, 215, 220],
+            [60, 65, 70, 75, 210, 215, 220, 225],
+            [65, 70, 75, 80, 215, 220, 225, 230],
+            [70, 75, 80, 85, 220, 225, 230, 235],
+            [75, 80, 85, 90, 225, 230, 235, 240],
+            [80, 85, 90, 95, 230, 235, 240, 245]
+        ];
+
+        let blurredData = [];
+        let magnitudeData = [];
+        let directionData = [];
+        let suppressedData = [];
+        let strongData = [];
+        let weakData = [];
+        let finalData = [];
+
+        function createGrid(containerId, data, isEdge = false) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+
+                    const value = data[i][j];
+
+                    if (isEdge) {
+                        // Binary edge display
+                        cell.style.backgroundColor = value > 0 ? '#000000' : '#ffffff';
+                        cell.style.color = value > 0 ? '#ffffff' : '#000000';
+                        cell.textContent = value > 0 ? '1' : '0';
+                    } else {
+                        // Grayscale display
+                        const gray = Math.min(255, Math.max(0, Math.round(value)));
+                        cell.style.backgroundColor = `rgb(${gray},${gray},${gray})`;
+                        cell.style.color = gray > 127 ? '#000000' : '#ffffff';
+                        cell.textContent = Math.round(value);
+                    }
+
+                    container.appendChild(cell);
+                }
+            }
+        }
+
+        function createDataMatrix() {
+            const table = document.getElementById('dataMatrix');
+            table.innerHTML = '';
+
+            for (let i = 0; i < 8; i++) {
+                const row = table.insertRow();
+                for (let j = 0; j < 8; j++) {
+                    const cell = row.insertCell();
+                    cell.textContent = originalData[i][j];
+                    if (j === 3 || j === 4) {
+                        cell.style.backgroundColor = '#ffeb3b';
+                    }
+                }
+            }
+        }
+
+        function gaussianBlur() {
+            const kernel = [[1, 2, 1], [2, 4, 2], [1, 2, 1]];
+            const sum = 16;
+
+            blurredData = [];
+            for (let i = 0; i < 8; i++) {
+                blurredData[i] = [];
+                for (let j = 0; j < 8; j++) {
+                    let total = 0;
+                    for (let ki = 0; ki < 3; ki++) {
+                        for (let kj = 0; kj < 3; kj++) {
+                            const pi = Math.max(0, Math.min(7, i + ki - 1));
+                            const pj = Math.max(0, Math.min(7, j + kj - 1));
+                            total += originalData[pi][pj] * kernel[ki][kj];
+                        }
+                    }
+                    blurredData[i][j] = total / sum;
+                }
+            }
+        }
+
+        function calculateGradients() {
+            const sobelX = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]];
+            const sobelY = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]];
+
+            magnitudeData = [];
+            directionData = [];
+
+            for (let i = 0; i < 8; i++) {
+                magnitudeData[i] = [];
+                directionData[i] = [];
+
+                for (let j = 0; j < 8; j++) {
+                    let gx = 0, gy = 0;
+
+                    for (let ki = 0; ki < 3; ki++) {
+                        for (let kj = 0; kj < 3; kj++) {
+                            const pi = Math.max(0, Math.min(7, i + ki - 1));
+                            const pj = Math.max(0, Math.min(7, j + kj - 1));
+                            gx += blurredData[pi][pj] * sobelX[ki][kj];
+                            gy += blurredData[pi][pj] * sobelY[ki][kj];
+                        }
+                    }
+
+                    magnitudeData[i][j] = Math.sqrt(gx * gx + gy * gy);
+                    directionData[i][j] = Math.atan2(gy, gx);
+                }
+            }
+        }
+
+        function nonMaxSuppression() {
+            suppressedData = [];
+
+            for (let i = 0; i < 8; i++) {
+                suppressedData[i] = [];
+                for (let j = 0; j < 8; j++) {
+                    const mag = magnitudeData[i][j];
+                    const dir = directionData[i][j];
+
+                    // Convert angle to degrees and normalize to 0-180
+                    let angle = (dir * 180 / Math.PI + 180) % 180;
+
+                    let n1 = 0, n2 = 0;
+
+                    if (angle < 22.5 || angle >= 157.5) {
+                        // Horizontal
+                        n1 = j > 0 ? magnitudeData[i][j-1] : 0;
+                        n2 = j < 7 ? magnitudeData[i][j+1] : 0;
+                    } else if (angle >= 22.5 && angle < 67.5) {
+                        // Diagonal /
+                        n1 = (i > 0 && j < 7) ? magnitudeData[i-1][j+1] : 0;
+                        n2 = (i < 7 && j > 0) ? magnitudeData[i+1][j-1] : 0;
+                    } else if (angle >= 67.5 && angle < 112.5) {
+                        // Vertical
+                        n1 = i > 0 ? magnitudeData[i-1][j] : 0;
+                        n2 = i < 7 ? magnitudeData[i+1][j] : 0;
+                    } else {
+                        // Diagonal \
+                        n1 = (i > 0 && j > 0) ? magnitudeData[i-1][j-1] : 0;
+                        n2 = (i < 7 && j < 7) ? magnitudeData[i+1][j+1] : 0;
+                    }
+
+                    suppressedData[i][j] = (mag >= n1 && mag >= n2) ? mag : 0;
+                }
+            }
+        }
+
+        function doubleThreshold() {
+            const lowT = parseInt(document.getElementById('lowThresh').value);
+            const highT = parseInt(document.getElementById('highThresh').value);
+
+            strongData = [];
+            weakData = [];
+
+            for (let i = 0; i < 8; i++) {
+                strongData[i] = [];
+                weakData[i] = [];
+
+                for (let j = 0; j < 8; j++) {
+                    const mag = suppressedData[i][j];
+
+                    if (mag >= highT) {
+                        strongData[i][j] = 1;
+                        weakData[i][j] = 0;
+                    } else if (mag >= lowT) {
+                        strongData[i][j] = 0;
+                        weakData[i][j] = 1;
+                    } else {
+                        strongData[i][j] = 0;
+                        weakData[i][j] = 0;
+                    }
+                }
+            }
+        }
+
+        function hysteresis() {
+            finalData = [];
+
+            // Initialize with strong edges
+            for (let i = 0; i < 8; i++) {
+                finalData[i] = [];
+                for (let j = 0; j < 8; j++) {
+                    finalData[i][j] = strongData[i][j];
+                }
+            }
+
+            // Connect weak edges to strong edges
+            let changed = true;
+            while (changed) {
+                changed = false;
+                for (let i = 0; i < 8; i++) {
+                    for (let j = 0; j < 8; j++) {
+                        if (finalData[i][j] === 1) {
+                            // Check 8 neighbors
+                            for (let di = -1; di <= 1; di++) {
+                                for (let dj = -1; dj <= 1; dj++) {
+                                    const ni = i + di;
+                                    const nj = j + dj;
+
+                                    if (ni >= 0 && ni < 8 && nj >= 0 && nj < 8) {
+                                        if (weakData[ni][nj] === 1 && finalData[ni][nj] === 0) {
+                                            finalData[ni][nj] = 1;
+                                            changed = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function updateSliders() {
+            document.getElementById('lowVal').textContent = document.getElementById('lowThresh').value;
+            document.getElementById('highVal').textContent = document.getElementById('highThresh').value;
+        }
+
+        function runCanny() {
+            // Step 1: Gaussian Blur
+            gaussianBlur();
+            createGrid('blurred', blurredData);
+
+            // Step 2: Calculate Gradients
+            calculateGradients();
+            createGrid('magnitude', magnitudeData);
+            createGrid('beforeNMS', magnitudeData);
+
+            // Step 3: Non-Maximum Suppression
+            nonMaxSuppression();
+            createGrid('afterNMS', suppressedData);
+
+            // Step 4: Double Thresholding
+            doubleThreshold();
+            createGrid('strong', strongData, true);
+            createGrid('weak', weakData, true);
+
+            // Create combined view for before hysteresis
+            let combined = [];
+            for (let i = 0; i < 8; i++) {
+                combined[i] = [];
+                for (let j = 0; j < 8; j++) {
+                    combined[i][j] = Math.max(strongData[i][j], weakData[i][j]);
+                }
+            }
+            createGrid('beforeHyst', combined, true);
+
+            // Step 5: Hysteresis
+            hysteresis();
+            createGrid('final', finalData, true);
+        }
+
+        function resetAll() {
+            const gridIds = ['blurred', 'magnitude', 'beforeNMS', 'afterNMS', 'strong', 'weak', 'beforeHyst', 'final'];
+            gridIds.forEach(id => {
+                const container = document.getElementById(id);
+                container.innerHTML = '';
+                for (let i = 0; i < 64; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.style.backgroundColor = '#e9ecef';
+                    cell.style.color = '#6c757d';
+                    cell.style.border = '1px solid #ced4da';
+                    cell.textContent = 'Click Run';
+                    cell.style.fontSize = '8px';
+                    container.appendChild(cell);
+                }
+            });
+        }
+
+        // Initialize
+        document.getElementById('lowThresh').addEventListener('input', updateSliders);
+        document.getElementById('highThresh').addEventListener('input', updateSliders);
+
+        window.onload = function() {
+            createGrid('original', originalData);
+            createDataMatrix();
+            updateSliders();
+
+            // Pre-calculate and display all steps immediately
+            runCanny();
+        };
+    </script>
+</body>
+</html>

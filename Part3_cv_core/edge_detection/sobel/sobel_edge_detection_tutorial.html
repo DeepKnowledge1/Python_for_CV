@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobel Edge Detection: Complete Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            color: #34495e;
+            margin: 30px 0 20px 0;
+            font-size: 1.8em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+        }
+
+        .step-container {
+            background: #fff;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .step-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .matrix {
+            display: grid;
+            gap: 2px;
+            justify-content: center;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .matrix-3x3 {
+            grid-template-columns: repeat(3, 50px);
+        }
+
+        .matrix-5x5 {
+            grid-template-columns: repeat(5, 40px);
+        }
+
+        .matrix-cell {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .matrix-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .kernel-cell {
+            background: linear-gradient(45deg, #fd79a8, #e84393);
+        }
+
+        .result-cell {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+
+        .calculation-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px solid #dee2e6;
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula {
+            background: linear-gradient(45deg, #fff3cd, #ffeaa7);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid #f39c12;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #ff7675, #fd79a8);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .canvas-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        button {
+            background: linear-gradient(45deg, #00b894, #00a085);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #81ecec, #74b9ff);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            color: #2d3436;
+            border-left: 5px solid #0984e3;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            color: #2d3436;
+            border-left: 5px solid #d63031;
+        }
+
+        code {
+            background: #2d3436;
+            color: #00b894;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .step-number {
+            background: linear-gradient(45deg, #fd79a8, #e84393);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Sobel Edge Detection: Complete Tutorial</h1>
+
+        <div class="info-box">
+            <strong>What You'll Learn:</strong> This comprehensive tutorial will take you through every step of Sobel Edge Detection, from basic concepts to implementation. You'll see numerical examples, visualizations, and interactive demonstrations.
+        </div>
+
+        <h2>📚 1. Introduction to Edge Detection</h2>
+        <div class="step-container">
+            <p><strong>Edge Detection</strong> is a fundamental technique in computer vision and image processing. It identifies boundaries between different regions in an image by detecting rapid changes in pixel intensity.</p>
+
+            <h3>Why is Edge Detection Important?</h3>
+            <ul>
+                <li>Object recognition and segmentation</li>
+                <li>Feature extraction</li>
+                <li>Image enhancement</li>
+                <li>Pattern recognition</li>
+                <li>Medical imaging analysis</li>
+            </ul>
+        </div>
+
+        <h2>🔍 2. What is Sobel Edge Detection?</h2>
+        <div class="step-container">
+            <p>The <span class="highlight">Sobel operator</span> is a discrete differentiation operator that computes an approximation of the gradient of image intensity. It uses two 3×3 convolution kernels to detect edges in both horizontal and vertical directions.</p>
+
+            <div class="info-box">
+                <strong>Key Advantages:</strong>
+                <ul>
+                    <li>Simple and fast computation</li>
+                    <li>Good noise resistance</li>
+                    <li>Provides both magnitude and direction of edges</li>
+                    <li>Works well for most practical applications</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>🧮 3. The Sobel Kernels</h2>
+        <div class="step-container">
+            <h3><span class="step-number">1</span>Horizontal Sobel Kernel (Gx)</h3>
+            <p>Detects <strong>vertical edges</strong> (changes in horizontal direction):</p>
+            <div class="matrix matrix-3x3">
+                <div class="matrix-cell kernel-cell">-1</div>
+                <div class="matrix-cell kernel-cell">0</div>
+                <div class="matrix-cell kernel-cell">1</div>
+                <div class="matrix-cell kernel-cell">-2</div>
+                <div class="matrix-cell kernel-cell">0</div>
+                <div class="matrix-cell kernel-cell">2</div>
+                <div class="matrix-cell kernel-cell">-1</div>
+                <div class="matrix-cell kernel-cell">0</div>
+                <div class="matrix-cell kernel-cell">1</div>
+            </div>
+
+            <h3><span class="step-number">2</span>Vertical Sobel Kernel (Gy)</h3>
+            <p>Detects <strong>horizontal edges</strong> (changes in vertical direction):</p>
+            <div class="matrix matrix-3x3">
+                <div class="matrix-cell kernel-cell">-1</div>
+                <div class="matrix-cell kernel-cell">-2</div>
+                <div class="matrix-cell kernel-cell">-1</div>
+                <div class="matrix-cell kernel-cell">0</div>
+                <div class="matrix-cell kernel-cell">0</div>
+                <div class="matrix-cell kernel-cell">0</div>
+                <div class="matrix-cell kernel-cell">1</div>
+                <div class="matrix-cell kernel-cell">2</div>
+                <div class="matrix-cell kernel-cell">1</div>
+            </div>
+        </div>
+
+        <h2>⚙️ 4. Step-by-Step Process</h2>
+
+        <div class="step-container">
+            <h3><span class="step-number">1</span>Image Preprocessing</h3>
+            <p>Convert the input image to grayscale if it's colored. This simplifies processing and focuses on intensity changes.</p>
+
+            <div class="warning-box">
+                <strong>Why Grayscale?</strong> Edge detection works on intensity values. Color images have RGB channels, but edges are primarily based on brightness changes, not color changes.
+            </div>
+        </div>
+
+        <div class="step-container">
+            <h3><span class="step-number">2</span>Convolution with Sobel Kernels</h3>
+            <p>Apply both Sobel kernels to every pixel in the image using convolution.</p>
+
+            <h4>Numerical Example:</h4>
+            <p>Let's say we have a 5×5 image patch:</p>
+            <div class="matrix matrix-5x5">
+                <div class="matrix-cell">10</div><div class="matrix-cell">20</div><div class="matrix-cell">30</div><div class="matrix-cell">40</div><div class="matrix-cell">50</div>
+                <div class="matrix-cell">15</div><div class="matrix-cell">25</div><div class="matrix-cell">35</div><div class="matrix-cell">45</div><div class="matrix-cell">55</div>
+                <div class="matrix-cell">20</div><div class="matrix-cell">30</div><div class="matrix-cell">100</div><div class="matrix-cell">110</div><div class="matrix-cell">120</div>
+                <div class="matrix-cell">25</div><div class="matrix-cell">35</div><div class="matrix-cell">105</div><div class="matrix-cell">115</div><div class="matrix-cell">125</div>
+                <div class="matrix-cell">30</div><div class="matrix-cell">40</div><div class="matrix-cell">110</div><div class="matrix-cell">120</div><div class="matrix-cell">130</div>
+            </div>
+
+            <p>Focusing on the center pixel (100), we extract a 3×3 neighborhood:</p>
+            <div class="matrix matrix-3x3">
+                <div class="matrix-cell">25</div><div class="matrix-cell">35</div><div class="matrix-cell">45</div>
+                <div class="matrix-cell">30</div><div class="matrix-cell">100</div><div class="matrix-cell">110</div>
+                <div class="matrix-cell">35</div><div class="matrix-cell">105</div><div class="matrix-cell">115</div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <h3><span class="step-number">3</span>Calculate Gx (Horizontal Gradient)</h3>
+            <div class="calculation-box">
+                <p><strong>Gx Calculation:</strong></p>
+                <p>Gx = (-1×25) + (0×35) + (1×45) + (-2×30) + (0×100) + (2×110) + (-1×35) + (0×105) + (1×115)</p>
+                <p>Gx = -25 + 0 + 45 - 60 + 0 + 220 - 35 + 0 + 115</p>
+                <p><strong>Gx = 260</strong></p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <h3><span class="step-number">4</span>Calculate Gy (Vertical Gradient)</h3>
+            <div class="calculation-box">
+                <p><strong>Gy Calculation:</strong></p>
+                <p>Gy = (-1×25) + (-2×35) + (-1×45) + (0×30) + (0×100) + (0×110) + (1×35) + (2×105) + (1×115)</p>
+                <p>Gy = -25 - 70 - 45 + 0 + 0 + 0 + 35 + 210 + 115</p>
+                <p><strong>Gy = 220</strong></p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <h3><span class="step-number">5</span>Calculate Edge Magnitude</h3>
+            <p>The edge magnitude combines both gradients:</p>
+            <div class="formula">
+                Magnitude = √(Gx² + Gy²)
+            </div>
+            <div class="calculation-box">
+                <p><strong>Magnitude Calculation:</strong></p>
+                <p>Magnitude = √(260² + 220²)</p>
+                <p>Magnitude = √(67,600 + 48,400)</p>
+                <p>Magnitude = √116,000</p>
+                <p><strong>Magnitude ≈ 340.6</strong></p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <h3><span class="step-number">6</span>Calculate Edge Direction (Optional)</h3>
+            <p>The edge direction can be calculated using:</p>
+            <div class="formula">
+                Direction = arctan(Gy / Gx)
+            </div>
+            <div class="calculation-box">
+                <p><strong>Direction Calculation:</strong></p>
+                <p>Direction = arctan(220 / 260)</p>
+                <p>Direction = arctan(0.846)</p>
+                <p><strong>Direction ≈ 40.2°</strong></p>
+            </div>
+        </div>
+
+        <h2>🎮 5. Interactive Visualization</h2>
+        <div class="step-container">
+            <div class="canvas-container">
+                <h3>Original Image</h3>
+                <canvas id="originalCanvas" width="200" height="200"></canvas>
+
+                <h3>Sobel X (Gx)</h3>
+                <canvas id="sobelXCanvas" width="200" height="200"></canvas>
+
+                <h3>Sobel Y (Gy)</h3>
+                <canvas id="sobelYCanvas" width="200" height="200"></canvas>
+
+                <h3>Combined Magnitude</h3>
+                <canvas id="magnitudeCanvas" width="200" height="200"></canvas>
+            </div>
+
+            <div class="controls">
+                <button onclick="generateRandomImage()">Generate Random Pattern</button>
+                <button onclick="createVerticalEdge()">Create Vertical Edge</button>
+                <button onclick="createHorizontalEdge()">Create Horizontal Edge</button>
+                <button onclick="createDiagonalEdge()">Create Diagonal Edge</button>
+            </div>
+        </div>
+
+        <h2>💡 6. Key Insights and Tips</h2>
+        <div class="step-container">
+            <h3>Understanding the Results:</h3>
+            <ul>
+                <li><strong>High Gx values:</strong> Indicate strong vertical edges</li>
+                <li><strong>High Gy values:</strong> Indicate strong horizontal edges</li>
+                <li><strong>High magnitude:</strong> Indicates strong edges regardless of direction</li>
+                <li><strong>Low magnitude:</strong> Indicates smooth regions with little change</li>
+            </ul>
+
+            <h3>Practical Considerations:</h3>
+            <ul>
+                <li><strong>Threshold selection:</strong> Choose appropriate threshold values to filter weak edges</li>
+                <li><strong>Noise handling:</strong> Consider applying Gaussian blur before edge detection</li>
+                <li><strong>Edge thickness:</strong> Sobel produces relatively thick edges compared to other methods</li>
+            </ul>
+        </div>
+
+        <h2>🔧 7. Implementation Considerations</h2>
+        <div class="step-container">
+            <h3>Boundary Handling:</h3>
+            <p>At image borders, there aren't enough neighboring pixels. Common approaches:</p>
+            <ul>
+                <li><strong>Zero padding:</strong> Assume pixels outside the image are 0</li>
+                <li><strong>Edge replication:</strong> Repeat the border pixels</li>
+                <li><strong>Mirror padding:</strong> Reflect the image at borders</li>
+                <li><strong>Ignore borders:</strong> Only process pixels with full neighborhoods</li>
+            </ul>
+
+            <h3>Optimization Tips:</h3>
+            <ul>
+                <li>Use integer arithmetic when possible for speed</li>
+                <li>Implement separable filters for better performance</li>
+                <li>Consider parallel processing for large images</li>
+                <li>Pre-compute kernel values</li>
+            </ul>
+        </div>
+
+        <h2>📊 8. Comparison with Other Edge Detectors</h2>
+        <div class="step-container">
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <tr style="background: linear-gradient(45deg, #74b9ff, #0984e3); color: white;">
+                    <th style="padding: 15px; border: 1px solid #ddd;">Method</th>
+                    <th style="padding: 15px; border: 1px solid #ddd;">Advantages</th>
+                    <th style="padding: 15px; border: 1px solid #ddd;">Disadvantages</th>
+                </tr>
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #ddd;"><strong>Sobel</strong></td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">Fast, simple, good noise resistance</td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">Thick edges, not optimal localization</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 15px; border: 1px solid #ddd;"><strong>Canny</strong></td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">Thin edges, excellent localization</td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">More complex, slower</td>
+                </tr>
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #ddd;"><strong>Prewitt</strong></td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">Similar to Sobel, simpler kernel</td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">Less noise resistance than Sobel</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>🎯 9. Applications and Use Cases</h2>
+        <div class="step-container">
+            <h3>Real-World Applications:</h3>
+            <ul>
+                <li><strong>Autonomous vehicles:</strong> Lane detection, obstacle recognition</li>
+                <li><strong>Medical imaging:</strong> Tumor boundary detection, organ segmentation</li>
+                <li><strong>Quality control:</strong> Defect detection in manufacturing</li>
+                <li><strong>Security systems:</strong> Motion detection, facial recognition preprocessing</li>
+                <li><strong>Robotics:</strong> Object recognition, navigation</li>
+                <li><strong>Document processing:</strong> Text region detection, table extraction</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>🏆 Congratulations!</h3>
+            <p>You've completed a comprehensive tutorial on Sobel Edge Detection. You now understand:</p>
+            <ul>
+                <li>The mathematical foundation of Sobel operators</li>
+                <li>Step-by-step calculation process with numerical examples</li>
+                <li>Practical implementation considerations</li>
+                <li>Real-world applications and use cases</li>
+            </ul>
+            <p>Practice with different images and experiment with the interactive visualization to deepen your understanding!</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize canvases
+        const canvases = {
+            original: document.getElementById('originalCanvas'),
+            sobelX: document.getElementById('sobelXCanvas'),
+            sobelY: document.getElementById('sobelYCanvas'),
+            magnitude: document.getElementById('magnitudeCanvas')
+        };
+
+        const contexts = {};
+        Object.keys(canvases).forEach(key => {
+            contexts[key] = canvases[key].getContext('2d');
+        });
+
+        // Sobel kernels
+        const sobelX = [
+            [-1, 0, 1],
+            [-2, 0, 2],
+            [-1, 0, 1]
+        ];
+
+        const sobelY = [
+            [-1, -2, -1],
+            [0, 0, 0],
+            [1, 2, 1]
+        ];
+
+        function createImageData(width, height) {
+            const imageData = contexts.original.createImageData(width, height);
+            return imageData;
+        }
+
+        function setPixel(imageData, x, y, r, g, b, a = 255) {
+            const index = (y * imageData.width + x) * 4;
+            imageData.data[index] = r;
+            imageData.data[index + 1] = g;
+            imageData.data[index + 2] = b;
+            imageData.data[index + 3] = a;
+        }
+
+        function getGrayscaleValue(imageData, x, y) {
+            const index = (y * imageData.width + x) * 4;
+            return (imageData.data[index] + imageData.data[index + 1] + imageData.data[index + 2]) / 3;
+        }
+
+        function applySobel(imageData) {
+            const width = imageData.width;
+            const height = imageData.height;
+
+            const gxData = contexts.sobelX.createImageData(width, height);
+            const gyData = contexts.sobelY.createImageData(width, height);
+            const magData = contexts.magnitude.createImageData(width, height);
+
+            for (let y = 1; y < height - 1; y++) {
+                for (let x = 1; x < width - 1; x++) {
+                    let gx = 0;
+                    let gy = 0;
+
+                    // Apply Sobel kernels
+                    for (let ky = -1; ky <= 1; ky++) {
+                        for (let kx = -1; kx <= 1; kx++) {
+                            const pixel = getGrayscaleValue(imageData, x + kx, y + ky);
+                            gx += pixel * sobelX[ky + 1][kx + 1];
+                            gy += pixel * sobelY[ky + 1][kx + 1];
+                        }
+                    }
+
+                    // Normalize and calculate magnitude
+                    const gxNorm = Math.abs(gx);
+                    const gyNorm = Math.abs(gy);
+                    const magnitude = Math.sqrt(gx * gx + gy * gy);
+
+                    // Set pixels (scale for visibility)
+                    const gxScaled = Math.min(255, gxNorm);
+                    const gyScaled = Math.min(255, gyNorm);
+                    const magScaled = Math.min(255, magnitude * 0.5);
+
+                    setPixel(gxData, x, y, gxScaled, gxScaled, gxScaled);
+                    setPixel(gyData, x, y, gyScaled, gyScaled, gyScaled);
+                    setPixel(magData, x, y, magScaled, magScaled, magScaled);
+                }
+            }
+
+            contexts.original.putImageData(imageData, 0, 0);
+            contexts.sobelX.putImageData(gxData, 0, 0);
+            contexts.sobelY.putImageData(gyData, 0, 0);
+            contexts.magnitude.putImageData(magData, 0, 0);
+        }
+
+        function generateRandomImage() {
+            const width = 200;
+            const height = 200;
+            const imageData = createImageData(width, height);
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const noise = Math.random() * 100;
+                    const pattern = Math.sin(x * 0.1) * Math.sin(y * 0.1) * 127 + 127;
+                    const value = Math.floor(pattern + noise);
+                    setPixel(imageData, x, y, value, value, value);
+                }
+            }
+
+            applySobel(imageData);
+        }
+
+        function createVerticalEdge() {
+            const width = 200;
+            const height = 200;
+            const imageData = createImageData(width, height);
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const value = x < width / 2 ? 50 : 200;
+                    setPixel(imageData, x, y, value, value, value);
+                }
+            }
+
+            applySobel(imageData);
+        }
+
+        function createHorizontalEdge() {
+            const width = 200;
+            const height = 200;
+            const imageData = createImageData(width, height);
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const value = y < height / 2 ? 50 : 200;
+                    setPixel(imageData, x, y, value, value, value);
+                }
+            }
+
+            applySobel(imageData);
+        }
+
+        function createDiagonalEdge() {
+            const width = 200;
+            const height = 200;
+            const imageData = createImageData(width, height);
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const value = x + y < width ? 50 : 200;
+                    setPixel(imageData, x, y, value, value, value);
+                }
+            }
+
+            applySobel(imageData);
+        }
+
+        // Initialize with a random pattern
+        generateRandomImage();
+    </script>
+</body>
+</html>
