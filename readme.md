@@ -149,7 +149,7 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 | Status | Title                                                          | Code Example                                      |
 | ----- | -------------------------------------------------------------- | ------------------------------------------------- |
 | 🔄 | 🔍 Introduction to Image Filtering & Kernels         [🎥 Watch Video](https://youtu.be/_1V2AaCnV2E)|  |
-| 🔄 | 🔪 Edge Detection: [Sobel](https://youtu.be/U_WYkAO0R3I), [Canny], and [Laplacian]  | [💻 Code Example](Part3_cv_core/edge_detection) |
+| 🔄 | 🔪 Edge Detection: [Sobel](https://youtu.be/U_WYkAO0R3I), [Canny](https://youtu.be/pgjFY2caqrM), and [Laplacian](https://youtu.be/xU5GFhE3sl8)  | [💻 Code Example](Part3_cv_core/edge_detection) |
 | 🔄 | 🧮 Convolution: How Filters Work Under the Hood      [🎥 Watch Video]| [💻 Code Example] |
 | 🔄 | 🎯 Corner Detection: Harris & Shi-Tomasi Methods     [🎥 Watch Video]| [💻 Code Example] |
 | 🔄 | 🧿 Blob Detection Using Laplacian of Gaussian        [🎥 Watch Video]| [💻 Code Example] |
