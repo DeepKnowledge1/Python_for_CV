@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIFT: Scale-Invariant Feature Transform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+        margin: 0px;
+        height: 100%;
+        width: 100%;
+        }
+
+        body {
+        margin: 0px;
+        min-height: 100%;
+        width: 100%;
+        }
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+            margin: 0;
+            height: 100%;
+
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slide:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .slide:nth-child(even) {
+            animation-delay: 0.4s;
+        }
+
+        .title-slide {
+            text-align: center;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+        }
+
+        .title-slide h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title-slide p {
+            font-size: 1.4em;
+            opacity: 0.9;
+        }
+
+        h2 {
+            color: #4a90e2;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #4a90e2;
+            padding-bottom: 10px;
+        }
+
+        .step-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            align-items: center;
+        }
+
+        .step-visual {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 3px solid #e9ecef;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ddd, #f0f0f0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .keypoint {
+            width: 8px;
+            height: 8px;
+            background: #ff4757;
+            border-radius: 50%;
+            position: absolute;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        .scale-pyramid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pyramid-level {
+            background: #e8f4fd;
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pyramid-level:hover {
+            transform: scale(1.05);
+        }
+
+        .pyramid-level h4 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+
+        .feature-points {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .feature-point {
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .descriptor-visualization {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            margin: 20px 0;
+        }
+
+        .descriptor-bin {
+            height: 30px;
+            background: linear-gradient(to top, #4a90e2, #87ceeb);
+            border-radius: 3px;
+            position: relative;
+            animation: grow 1.5s ease-out;
+        }
+
+        @keyframes grow {
+            from { height: 0; }
+            to { height: 30px; }
+        }
+
+        .comparison-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .demo-image {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #dee2e6;
+        }
+
+        .demo-image h4 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .match-lines {
+            position: relative;
+            height: 100px;
+            background: linear-gradient(to right, transparent 40%, #28a745 50%, transparent 60%);
+            margin: 20px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid #e17055;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .pros, .cons {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .pros {
+            border-left: 5px solid #28a745;
+        }
+
+        .cons {
+            border-left: 5px solid #dc3545;
+        }
+
+        .pros h3 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .cons h3 {
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 8px;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        li:before {
+            content: "✓";
+            position: absolute;
+            left: 12px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .cons li:before {
+            content: "⚠";
+            color: #dc3545;
+        }
+
+        .interactive-demo {
+            text-align: center;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .step-number {
+            background: #4a90e2;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+
+        @media (max-width: 768px) {
+            .step-container, .comparison-demo, .pros-cons {
+                grid-template-columns: 1fr;
+            }
+
+            .title-slide h1 {
+                font-size: 2.5em;
+            }
+
+            .slide {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+
+        <!-- Title Slide -->
+        <div class="slide title-slide">
+            <h1>🔍 SIFT Algorithm</h1>
+            <p><strong>Scale-Invariant Feature Transform</strong></p>
+            <p>Finding and Matching Features Like a Computer Vision Expert!</p>
+        </div>
+
+        <!-- What is SIFT? -->
+        <div class="slide">
+            <h2>What is SIFT? 🤔</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.3em; margin-bottom: 15px;"><strong>SIFT is like a super-smart detective for images!</strong></p>
+                <p>It finds unique "fingerprints" in pictures that stay the same even when the image is:</p>
+                <ul style="margin-top: 15px;">
+                    <li>Rotated 🔄</li>
+                    <li>Scaled (zoomed in/out) 🔍</li>
+                    <li>Slightly changed in lighting 💡</li>
+                </ul>
+            </div>
+
+            <div class="comparison-demo">
+                <div class="demo-image">
+                    <h4>Original Image</h4>
+                    <div class="image-placeholder">
+                        <span style="font-size: 2em;">🏠</span>
+                        <div class="keypoint" style="top: 30%; left: 40%;"></div>
+                        <div class="keypoint" style="top: 60%; left: 70%;"></div>
+                    </div>
+                </div>
+                <div class="demo-image">
+                    <h4>Rotated & Scaled</h4>
+                    <div class="image-placeholder">
+                        <span style="font-size: 1.5em; transform: rotate(30deg); display: inline-block;">🏠</span>
+                        <div class="keypoint" style="top: 35%; left: 45%;"></div>
+                        <div class="keypoint" style="top: 55%; left: 65%;"></div>
+                    </div>
+                </div>
+                <div class="demo-image">
+                    <h4>Still Matches! ✨</h4>
+                    <div class="match-lines">
+                        SAME FEATURES!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Scale Space -->
+        <div class="slide">
+            <h2>Step 1: Building the Scale-Space Pyramid 🏔️</h2>
+            <div class="step-container">
+                <div>
+                    <div class="step-number">1</div>
+                    <p><strong>Think of it like this:</strong> Imagine looking at a building from different distances. SIFT creates multiple "views" of the same image at different scales.</p>
+                    <p style="margin-top: 15px;"><strong>Why?</strong> Some features are visible when you're close up, others when you're far away. We want to catch them all!</p>
+                    <div class="highlight-box" style="margin-top: 20px;">
+                        <p><strong>🎯 What's an "Octave"?</strong> Think of it like zoom levels on a camera! Each octave is the same image but at half the size of the previous one.</p>
+                        <p style="margin-top: 10px;"><strong>📐 Simple Math:</strong> Octave 1 = 800×600, Octave 2 = 400×300, Octave 3 = 200×150</p>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <h4>Scale-Space Pyramid</h4>
+                    <div class="scale-pyramid">
+                        <div class="pyramid-level">
+                            <h4>Octave 1</h4>
+                            <div style="font-size: 1.8em;">📷</div>
+                            <small>Full Resolution<br>800 × 600 pixels</small>
+                        </div>
+                        <div class="pyramid-level">
+                            <h4>Octave 2</h4>
+                            <div style="font-size: 1.4em;">📷</div>
+                            <small>Half Size<br>400 × 300 pixels</small>
+                        </div>
+                        <div class="pyramid-level">
+                            <h4>Octave 3</h4>
+                            <div style="font-size: 1em;">📷</div>
+                            <small>Quarter Size<br>200 × 150 pixels</small>
+                        </div>
+                    </div>
+                    <div style="background: #e8f4fd; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                        <p style="text-align: center; margin: 0;"><strong>🔍 Why "Octave"?</strong><br>
+                        <small>Like musical octaves where each note is double the frequency, each image octave is half the size!</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Scale-Space Explanation -->
+        <div class="slide">
+            <h2>How Scale-Space Actually Works 🔬</h2>
+            <div class="step-container">
+                <div class="step-visual">
+                    <h4>Gaussian Blur Process</h4>
+                    <div style="margin: 20px 0;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                            <div style="text-align: center;">
+                                <div class="image-placeholder" style="height: 80px; background: linear-gradient(45deg, #333, #666); border: 2px solid #000;">
+                                    <span style="color: white; font-weight: bold;">Sharp</span>
+                                </div>
+                                <small>σ = 1.0</small>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="image-placeholder" style="height: 80px; background: linear-gradient(45deg, #555, #888); border: 2px solid #333;">
+                                    <span style="color: white;">Blurred</span>
+                                </div>
+                                <small>σ = 1.4</small>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="image-placeholder" style="height: 80px; background: linear-gradient(45deg, #777, #aaa); border: 2px solid #555;">
+                                    <span style="color: white;">More Blur</span>
+                                </div>
+                                <small>σ = 2.0</small>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin: 15px 0;">
+                            <div style="font-size: 1.5em;">⬇️</div>
+                            <strong>Subtract Adjacent Levels</strong>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                            <div style="text-align: center;">
+                                <div class="image-placeholder" style="height: 60px; background: linear-gradient(45deg, #ff6b6b, #feca57); border: 2px solid #ff6b6b;">
+                                    <span style="color: white; font-size: 0.8em;">DoG 1</span>
+                                </div>
+                                <small>Difference 1</small>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="image-placeholder" style="height: 60px; background: linear-gradient(45deg, #48dbfb, #0abde3); border: 2px solid #48dbfb;">
+                                    <span style="color: white; font-size: 0.8em;">DoG 2</span>
+                                </div>
+                                <small>Difference 2</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p><strong>Here's what really happens:</strong></p>
+                    <ul style="margin: 15px 0;">
+                        <li><strong>Gaussian Smoothing:</strong> Apply blur filters with increasing strength (σ values)</li>
+                        <li><strong>Multiple Octaves:</strong> Repeat this process at different image sizes</li>
+                        <li><strong>DoG Creation:</strong> Subtract each blurred image from the next</li>
+                        <li><strong>Feature Detection:</strong> Look for peaks/valleys in these difference images</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p><strong>🧠 Why DoG?</strong> Difference of Gaussians approximates the Laplacian of Gaussian - perfect for finding blob-like features at different scales!</p>
+                    </div>
+                    <div style="background: #e8f4fd; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                        <p><strong>Real Numbers:</strong> Typically 3-4 octaves, 5-6 blur levels per octave = 15-24 total scale levels!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Keypoint Detection -->
+        <div class="slide">
+            <h2>Step 2: Finding Keypoints (Interest Points) 📍</h2>
+            <div class="step-container">
+                <div class="step-visual">
+                    <div class="step-number">2</div>
+                    <h4>Keypoint Detection</h4>
+                    <div class="image-placeholder">
+                        <span style="font-size: 2em;">🌄</span>
+                        <div class="keypoint" style="top: 20%; left: 30%;"></div>
+                        <div class="keypoint" style="top: 40%; left: 60%;"></div>
+                        <div class="keypoint" style="top: 70%; left: 25%;"></div>
+                        <div class="keypoint" style="top: 60%; left: 80%;"></div>
+                        <div class="keypoint" style="top: 30%; left: 75%;"></div>
+                    </div>
+                    <div class="feature-points">
+                        <div class="feature-point">1</div>
+                        <div class="feature-point">2</div>
+                        <div class="feature-point">3</div>
+                        <div class="feature-point">4</div>
+                    </div>
+                </div>
+                <div>
+                    <p><strong>SIFT looks for "interesting" spots:</strong></p>
+                    <ul style="margin: 15px 0;">
+                        <li>Corners and edges</li>
+                        <li>Texture changes</li>
+                        <li>Blob-like structures</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p><strong>🎯 Goal:</strong> Find points that are unique and easy to spot again, even if the image changes!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Orientation Assignment -->
+        <div class="slide">
+            <h2>Step 3: Assigning Orientation 🧭</h2>
+            <div class="step-container">
+                <div>
+                    <div class="step-number">3</div>
+                    <p><strong>Like giving each keypoint a compass direction!</strong></p>
+                    <p style="margin: 15px 0;">SIFT looks at the gradient (direction of intensity change) around each keypoint and assigns it a main orientation.</p>
+                    <div class="highlight-box">
+                        <p><strong>🔄 This makes SIFT rotation-invariant!</strong> No matter how the image is rotated, the relative orientation stays the same.</p>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <h4>Orientation Assignment</h4>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="font-size: 3em; position: relative;">
+                            📍
+                            <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 0.5em;">
+                                ⬆️
+                            </div>
+                        </div>
+                        <p style="margin-top: 10px;"><strong>Main Direction: 90°</strong></p>
+                    </div>
+                    <div style="background: #e8f4fd; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                        <small><strong>Fun Fact:</strong> Each keypoint can have multiple orientations if there are several strong gradient directions!</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Descriptor Generation -->
+        <div class="slide">
+            <h2>Step 4: Creating Feature Descriptors 📊</h2>
+            <div class="step-container">
+                <div class="step-visual">
+                    <div class="step-number">4</div>
+                    <h4>128-Dimensional Descriptor</h4>
+                    <div class="descriptor-visualization">
+                        <div class="descriptor-bin" style="height: 25px;"></div>
+                        <div class="descriptor-bin" style="height: 35px;"></div>
+                        <div class="descriptor-bin" style="height: 20px;"></div>
+                        <div class="descriptor-bin" style="height: 40px;"></div>
+                        <div class="descriptor-bin" style="height: 30px;"></div>
+                        <div class="descriptor-bin" style="height: 15px;"></div>
+                        <div class="descriptor-bin" style="height: 45px;"></div>
+                        <div class="descriptor-bin" style="height: 25px;"></div>
+                    </div>
+                    <p style="text-align: center; margin-top: 15px;"><strong>Unique "Fingerprint"</strong></p>
+                    <small style="display: block; text-align: center; margin-top: 10px;">128 numbers describing the local area</small>
+                </div>
+                <div>
+                    <p><strong>This is like creating a detailed "ID card" for each keypoint:</strong></p>
+                    <ul style="margin: 15px 0;">
+                        <li>Analyzes 16x16 pixel neighborhood</li>
+                        <li>Divides into 4x4 subregions</li>
+                        <li>Creates histogram of gradient directions</li>
+                        <li>Results in 128 unique numbers</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p><strong>💡 Think of it as:</strong> A very detailed description that captures what makes this spot special and recognizable!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-World Example -->
+        <div class="slide">
+            <h2>Real-World Example: Object Recognition 🎯</h2>
+            <div class="comparison-demo">
+                <div class="demo-image">
+                    <h4>Reference Image</h4>
+                    <div class="image-placeholder">
+                        <span style="font-size: 2em;">📱</span>
+                        <div class="keypoint" style="top: 25%; left: 30%;"></div>
+                        <div class="keypoint" style="top: 75%; left: 70%;"></div>
+                        <div class="keypoint" style="top: 50%; left: 50%;"></div>
+                    </div>
+                    <small>Extracted 856 keypoints</small>
+                </div>
+                <div class="demo-image">
+                    <h4>Scene Image</h4>
+                    <div class="image-placeholder">
+                        <span style="font-size: 1.2em; margin-right: 10px;">🏠</span>
+                        <span style="font-size: 1em;">📱</span>
+                        <span style="font-size: 0.8em; margin-left: 8px;">🌳</span>
+                        <div class="keypoint" style="top: 45%; left: 55%;"></div>
+                        <div class="keypoint" style="top: 65%; left: 58%;"></div>
+                        <div class="keypoint" style="top: 52%; left: 52%;"></div>
+                    </div>
+                    <small>Found 1,243 keypoints</small>
+                </div>
+                <div class="demo-image">
+                    <h4>Matches Found! ✨</h4>
+                    <div class="match-lines">
+                        47 GOOD MATCHES
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div style="display: inline-block; width: 20px; height: 20px; background: #28a745; border-radius: 50%; margin: 2px;"></div>
+                        <div style="display: inline-block; width: 20px; height: 20px; background: #28a745; border-radius: 50%; margin: 2px;"></div>
+                        <div style="display: inline-block; width: 20px; height: 20px; background: #28a745; border-radius: 50%; margin: 2px;"></div>
+                    </div>
+                    <small>Object successfully detected!</small>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>🎉 Success!</strong> Even though the phone is smaller, rotated, and surrounded by other objects, SIFT still finds matching features and recognizes it!</p>
+            </div>
+        </div>
+
+        <!-- Pros and Cons -->
+        <div class="slide">
+            <h2>Pros & Cons of SIFT ⚖️</h2>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3>✅ Pros</h3>
+                    <ul>
+                        <li><strong>Robust:</strong> Works despite rotation, scaling, and lighting changes</li>
+                        <li><strong>Distinctive:</strong> Creates unique descriptors</li>
+                        <li><strong>Reliable:</strong> Time-tested and proven</li>
+                        <li><strong>Versatile:</strong> Works for many applications</li>
+                        <li><strong>Repeatable:</strong> Finds same features consistently</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h3>⚠️ Cons</h3>
+                    <ul>
+                        <li><strong>Slow:</strong> Computationally intensive</li>
+                        <li><strong>Patent Issues:</strong> Was patented (now expired)</li>
+                        <li><strong>Poor with:</strong> Smooth areas with little texture</li>
+                        <li><strong>Large descriptors:</strong> 128 dimensions per keypoint</li>
+                        <li><strong>Not affine invariant:</strong> Struggles with strong perspective changes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications -->
+        <div class="slide">
+            <h2>Where is SIFT Used? 🌟</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 30px 0;">
+                <div class="highlight-box" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
+                    <h3 style="color: #fff;">📷 Photography</h3>
+                    <p>Image stitching for panoramas</p>
+                </div>
+                <div class="highlight-box" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
+                    <h3 style="color: #333;">🤖 Computer Vision</h3>
+                    <p>Object recognition and tracking</p>
+                </div>
+                <div class="highlight-box" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">
+                    <h3 style="color: #333;">🎮 Gaming</h3>
+                    <p>Augmented reality applications</p>
+                </div>
+                <div class="highlight-box" style="background: linear-gradient(135deg, #a8c0ff, #3f2b96);">
+                    <h3 style="color: #fff;">🏥 Medical</h3>
+                    <p>Medical image registration</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Summary -->
+        <div class="slide">
+            <h2>SIFT in a Nutshell 🥜</h2>
+            <div class="interactive-demo">
+                <h3 style="color: #333; margin-bottom: 25px;">The 4-Step SIFT Process</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🏔️</div>
+                        <strong>1. Scale-Space</strong>
+                        <p>Multiple image scales</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📍</div>
+                        <strong>2. Keypoints</strong>
+                        <p>Find interesting spots</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🧭</div>
+                        <strong>3. Orientation</strong>
+                        <p>Assign directions</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📊</div>
+                        <strong>4. Descriptors</strong>
+                        <p>Create fingerprints</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="font-size: 1.2em; text-align: center;"><strong>🎯 Result: Robust, distinctive features that can be matched across different images!</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thank You -->
+        <div class="slide title-slide" style="background: linear-gradient(135deg, #4ecdc4, #44a08d);">
+            <h1>Thank You! 🙏</h1>
+            <p style="font-size: 1.3em; margin: 20px 0;">Now you understand how SIFT finds and matches image features!</p>
+            <div style="margin-top: 40px;">
+                <p>🔍 <strong>Remember:</strong> SIFT = Smart Feature Detective</p>
+                <p>📸 <strong>Applications:</strong> Object recognition, panoramas, AR, and more!</p>
+                <p>⚡ <strong>Key Strength:</strong> Works despite image transformations</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
