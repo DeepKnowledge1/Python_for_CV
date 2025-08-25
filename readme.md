@@ -150,9 +150,9 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 | ----- | -------------------------------------------------------------- | ------------------------------------------------- |
 | ✅ | 🔍 Introduction to Image Filtering & Kernels         [🎥 Watch Video](https://youtu.be/_1V2AaCnV2E)|  |
 | ✅ | 🔪 Edge Detection: [🎥Sobel](https://youtu.be/U_WYkAO0R3I), [🎥Canny](https://youtu.be/pgjFY2caqrM), and [🎥 Laplacian](https://youtu.be/xU5GFhE3sl8)  | [💻 Soble](Part3_cv_core/edge_detection/sobel/Sobel_Simple.ipynb)[💻 Canny](Part3_cv_core/edge_detection/sobel/Sobel_Simple.ipynb)[💻 Laplacian](Part3_cv_core/edge_detection/sobel/Sobel_Simple.ipynb)|
-| 🔄 | 🧮 Convolution: How Filters Work Under the Hood      [🎥 Watch Video](https://youtu.be/gKdLa40naBw)| [💻 Code Example]|
-| 🔄 | 🎯 [Corner Detection: Harris & Shi-Tomasi Methods](https://youtu.be/hTKM32C9svQ) | [💻 Code Example](Part3_cv_core/corner_detection/corner.ipynb) |
-| 🔄 | 🧿 [Blob Detection Using Laplacian of Gaussian](https://youtu.be/NAvAkd4Do9g)      | [💻 Canny](Part3_cv_core/edge_detection/laplacian/Laplacian_Simple.ipynb) |
+| ✅ | 🧮 Convolution: How Filters Work Under the Hood      [🎥 Watch Video](https://youtu.be/gKdLa40naBw)| [💻 Code Example]|
+| ✅ | 🎯 [Corner Detection: Harris & Shi-Tomasi Methods](https://youtu.be/hTKM32C9svQ) | [💻 Code Example](Part3_cv_core/corner_detection/corner.ipynb) |
+| ✅ | 🧿 [Blob Detection Using Laplacian of Gaussian](https://youtu.be/NAvAkd4Do9g)      | [💻 Canny](Part3_cv_core/edge_detection/laplacian/Laplacian_Simple.ipynb) |
 | 🔄 | 🌀 Advanced Filtering for Denoising                  [🎥 Watch Video]| [💻 Code Example] |
 | 🔄 | 🎭 Mini Project: Edge Detection Visualization Tool   [🎥 Watch Video]| [💻 Code Example] |
 
@@ -161,7 +161,7 @@ python cv_toolkit.py --input ./raw --resize 256x256 --grayscale --add_scratches 
 
 | Status | Title                                                          | Code Example                                      |
 | ----- | -------------------------------------------------------------- | ------------------------------------------------- |
-| 🔄 | 🔑 Local Features: [SIFT](https://youtu.be/YFoousMYfHg), SURF, ORB, and BRIEF        | [💻 SIFT](Part3_cv_core/feature_detection/sift/sift.py) |
+| ✅ | 🔑 Local Features: [SIFT](https://youtu.be/YFoousMYfHg), SURF, ORB, and BRIEF        | [💻 SIFT](Part3_cv_core/feature_detection/sift/sift.py) |
 | 🔄 | 🔄 Feature Matching Techniques & Distance Metrics    [🎥 Watch Video]| [💻 Code Example] |
 | 🔄 | 🖼️ Image Matching with RANSAC                       [🎥 Watch Video]| [💻 Code Example] |
 | 🔄 | 🧩 Creating Image Mosaics with Homography            [🎥 Watch Video]| [💻 Code Example] |
